@@ -1,0 +1,16 @@
+[
+  {
+    "title": "PlacementBuddy - JIIT's Placement Data",
+    "description": "Access and analyze the past 2 years of placement data with advanced sorting, filtering, and interactive features.",
+    "tags": ["MICRO-SAAS"],
+    "link": "https://placementbuddy.aryancodes.tech",
+    "github": ""
+  },
+  {
+    "title": "WidgetWall - Chrome Extension",
+    "description": "Browser extension for streamlined task management, time tracking, and productivity enhancement.",
+    "tags": ["EXTENSION"],
+    "link": "https://widgetwall.aryancodes.tech",
+    "github": ""
+  }
+]

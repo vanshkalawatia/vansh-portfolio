@@ -4,23 +4,23 @@ import socialPosts from '../data/socialPosts.json';
 <section id="activity" class="scroll-mt-24">
   <div class="flex items-center gap-4 mb-12">
     <h2 class="text-4xl font-black uppercase tracking-tight">Activity Feed</h2>
-    <div class="h-2 flex-1 bg-black mt-2"></div>
+    <div class="h-2 flex-1 bg-neo-border mt-2"></div>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {socialPosts.map((post) => (
-      <a href={post.link} target="_blank" class="block bg-white border-4 border-black p-6 shadow-neo hover:-translate-y-1 hover:shadow-neo-lg transition-all group flex flex-col">
+      <a href={post.link} target="_blank" class="block bg-neo-card border-4 border-neo-border p-6 shadow-neo hover:-translate-y-1 hover:shadow-neo-lg transition-all group flex flex-col">
         <div class="flex justify-between items-start mb-4">
-          <span class={`font-black uppercase text-sm border-2 border-black px-2 py-1 shadow-neo-sm ${post.platform === 'X' ? 'bg-black text-white' : 'bg-pink-500 text-white'}`}>
+          <span class={`font-black uppercase text-sm border-2 border-neo-border px-2 py-1 shadow-neo-sm ${post.platform === 'X' ? 'bg-neo-text text-neo-bg' : 'bg-pink-500 text-white'}`}>
             {post.platform}
           </span>
-          <span class="text-sm font-bold text-gray-500">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+          <span class="text-sm font-bold opacity-60">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
         </div>
         <p class="font-medium text-lg mb-4 flex-1 group-hover:text-neo-accent transition-colors">
           "{post.content}"
         </p>
         {post.type === 'Reel' && (
-          <span class="inline-block w-max border-2 border-black px-2 py-1 bg-yellow-300 text-xs font-black shadow-neo-sm uppercase mt-auto">
+          <span class="inline-block w-max border-2 border-neo-border px-2 py-1 bg-yellow-300 text-black text-xs font-black shadow-neo-sm uppercase mt-auto">
             🎥 Reel
           </span>
         )}

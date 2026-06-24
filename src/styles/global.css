@@ -3,7 +3,25 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --neo-bg: #f4f4f0;
+    --neo-accent: #60a5fa;
+    --neo-text: #111827;
+    --neo-border: #000000;
+    --neo-card: #ffffff;
+    --neo-shadow: #000000;
+  }
+  
+  .dark {
+    --neo-bg: #1a1a1a;
+    --neo-accent: #60a5fa;
+    --neo-text: #f4f4f0;
+    --neo-border: #f4f4f0;
+    --neo-card: #2a2a2a;
+    --neo-shadow: #f4f4f0;
+  }
+
   body {
-    @apply bg-neo-bg text-neo-text font-sans antialiased;
+    @apply bg-neo-bg text-neo-text font-sans antialiased transition-colors duration-200;
   }
 }
