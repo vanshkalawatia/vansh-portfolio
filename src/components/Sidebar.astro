@@ -8,12 +8,12 @@ const navLinks = [
 ];
 ---
 
-<aside class="lg:sticky lg:top-0 lg:h-screen lg:w-64 pt-12 lg:pt-24 pb-12 flex flex-col justify-between">
-  <div>
-    <div class="flex justify-between items-start mb-8">
+<aside class="sticky top-0 z-50 bg-neo-bg lg:h-screen lg:w-64 pt-6 lg:pt-24 pb-4 lg:pb-12 flex flex-col justify-between border-b-4 border-neo-border lg:border-none mb-8 lg:mb-0">
+  <div class="flex flex-col gap-4 lg:gap-8">
+    <div class="flex justify-between items-center lg:items-start">
       <a href="/" class="block">
-        <h1 class="text-4xl font-black tracking-tight border-b-4 border-neo-border inline-block mb-1">VK.</h1>
-        <p class="text-lg font-bold text-neo-accent uppercase tracking-wider">Backend Dev</p>
+        <h1 class="text-3xl lg:text-4xl font-black tracking-tight border-b-4 border-neo-border inline-block mb-1">VK.</h1>
+        <p class="hidden lg:block text-lg font-bold text-neo-accent uppercase tracking-wider">Backend Dev</p>
       </a>
       
       <button id="theme-toggle" class="p-2 border-2 border-neo-border bg-neo-card shadow-neo-sm hover:translate-y-1 hover:shadow-none transition-all">
@@ -22,11 +22,11 @@ const navLinks = [
       </button>
     </div>
     
-    <nav class="space-y-4">
+    <nav class="flex flex-row lg:flex-col gap-3 lg:gap-0 lg:space-y-4 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
       {navLinks.map((link) => (
         <a 
           href={link.href} 
-          class="block text-xl font-bold uppercase hover:translate-x-2 transition-transform w-max hover:text-neo-accent"
+          class="flex-shrink-0 block text-xs sm:text-sm lg:text-xl font-bold uppercase lg:hover:translate-x-2 transition-transform w-max hover:text-neo-accent border-2 border-neo-border lg:border-none px-3 py-1.5 lg:px-0 lg:py-0 bg-neo-card lg:bg-transparent shadow-neo-sm lg:shadow-none"
         >
           {link.name}
         </a>
