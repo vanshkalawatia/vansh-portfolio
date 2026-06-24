@@ -1,0 +1,59 @@
+---
+const projects = [
+  {
+    title: 'Distributed Task Queue',
+    description: 'A highly scalable task queue built with Go and Redis, supporting priority queues and delayed tasks.',
+    tags: ['Go', 'Redis', 'Docker'],
+    link: '#',
+    github: '#'
+  },
+  {
+    title: 'High-Performance API Gateway',
+    description: 'Reverse proxy and API gateway implemented in Go, featuring rate limiting, circuit breaking, and load balancing.',
+    tags: ['Go', 'gRPC', 'PostgreSQL'],
+    link: '#',
+    github: '#'
+  },
+  {
+    title: 'Microservices E-commerce',
+    description: 'Backend services for an e-commerce platform using event-driven architecture and CQRS.',
+    tags: ['Go', 'Kafka', 'PostgreSQL', 'Docker'],
+    link: '#',
+    github: '#'
+  }
+];
+---
+<section id="projects" class="scroll-mt-24">
+  <div class="flex items-center gap-4 mb-12">
+    <h2 class="text-4xl font-black uppercase tracking-tight">Selected Projects</h2>
+    <div class="h-2 flex-1 bg-black mt-2"></div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    {projects.map((project) => (
+      <div class="bg-white border-4 border-black p-6 sm:p-8 flex flex-col shadow-neo transform transition-transform hover:-translate-y-2 hover:shadow-neo-lg">
+        <h3 class="text-2xl font-black mb-3">{project.title}</h3>
+        <p class="text-lg font-medium mb-6 flex-1">
+          {project.description}
+        </p>
+        
+        <div class="flex flex-wrap gap-2 mb-8">
+          {project.tags.map((tag) => (
+            <span class="border-2 border-black px-3 py-1 bg-neo-bg text-sm font-bold shadow-neo-sm uppercase">
+              {tag}
+            </span>
+          ))}
+        </div>
+        
+        <div class="flex gap-4 mt-auto">
+          <a href={project.github} class="flex-1 text-center border-4 border-black py-3 font-black uppercase hover:bg-black hover:text-white transition-colors shadow-neo-sm">
+            Source
+          </a>
+          <a href={project.link} class="flex-1 text-center border-4 border-black py-3 font-black uppercase bg-neo-accent text-white hover:bg-blue-600 transition-colors shadow-neo-sm">
+            Live
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

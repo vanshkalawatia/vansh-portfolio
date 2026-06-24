@@ -1,0 +1,36 @@
+---
+const navLinks = [
+  { name: 'Education & Exp', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Activity', href: '#activity' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'Contact', href: '#contact' },
+];
+---
+
+<aside class="lg:sticky lg:top-0 lg:h-screen lg:w-64 pt-12 lg:pt-24 pb-12 flex flex-col justify-between">
+  <div>
+    <a href="/" class="block mb-8">
+      <h1 class="text-4xl font-black tracking-tight border-b-4 border-black inline-block mb-1">VK.</h1>
+      <p class="text-lg font-bold text-neo-accent uppercase tracking-wider">Backend Dev</p>
+    </a>
+    
+    <nav class="space-y-4">
+      {navLinks.map((link) => (
+        <a 
+          href={link.href} 
+          class="block text-xl font-bold uppercase hover:translate-x-2 transition-transform w-max hover:text-neo-accent"
+        >
+          {link.name}
+        </a>
+      ))}
+    </nav>
+  </div>
+  
+  <div class="hidden lg:block mt-12">
+    <div class="border-2 border-black p-3 bg-white shadow-neo-sm transform -rotate-2">
+      <p class="font-bold text-sm">Open to work</p>
+      <p class="text-xs">Based in India</p>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,16 @@
+# Local Data
+.env
+.env.*
+!.env.example
+
+# Build Outputs
+.astro/
+.vercel
+.netlify
+dist/
+dist-ssr/
+node_modules/
+
+# Mac / Windows files
+.DS_Store
+Thumbs.db
