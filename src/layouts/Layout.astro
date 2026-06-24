@@ -36,8 +36,12 @@ const { title } = Astro.props;
 	</head>
 	<body class="bg-neo-bg text-neo-text font-sans selection:bg-neo-accent selection:text-white">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="flex flex-col lg:flex-row gap-8 lg:gap-16 relative">
+			<div class="flex flex-col lg:flex-row gap-8 lg:gap-12 relative">
 				<Sidebar />
+				
+				<!-- Subtle Separator -->
+				<div class="hidden lg:block w-[2px] bg-gray-300 dark:bg-gray-700 my-16 rounded-full opacity-50"></div>
+				
 				<main class="flex-1 py-12 lg:py-24 space-y-24 min-w-0">
 					<slot />
 				</main>
