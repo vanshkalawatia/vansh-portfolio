@@ -1,5 +1,12 @@
 ---
 import socialPosts from '../data/socialPosts.json';
+
+const platformColors: Record<string, string> = {
+  'X': 'bg-neo-text text-neo-bg',
+  'Instagram': 'bg-pink-500 text-white',
+  'LinkedIn': 'bg-[#0a66c2] text-white',
+  'Linkedin': 'bg-[#0a66c2] text-white',
+};
 ---
 <section id="activity" class="scroll-mt-24">
   <div class="flex items-center gap-4 mb-12">
@@ -11,7 +18,7 @@ import socialPosts from '../data/socialPosts.json';
     {socialPosts.map((post) => (
       <a href={post.link} target="_blank" class="block bg-neo-card border-4 border-neo-border p-6 shadow-neo hover:-translate-y-1 hover:shadow-neo-lg transition-all group flex flex-col">
         <div class="flex justify-between items-start mb-4">
-          <span class={`font-black uppercase text-sm border-2 border-neo-border px-2 py-1 shadow-neo-sm ${post.platform === 'X' ? 'bg-neo-text text-neo-bg' : 'bg-pink-500 text-white'}`}>
+          <span class={`font-black uppercase text-sm border-2 border-neo-border px-2 py-1 shadow-neo-sm ${platformColors[post.platform] || 'bg-neo-accent text-white'}`}>
             {post.platform}
           </span>
           <span class="text-sm font-bold opacity-60">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
@@ -19,9 +26,9 @@ import socialPosts from '../data/socialPosts.json';
         <p class="font-medium text-lg mb-4 flex-1 group-hover:text-neo-accent transition-colors">
           "{post.content}"
         </p>
-        {post.type === 'Reel' && (
+        {post.type && (
           <span class="inline-block w-max border-2 border-neo-border px-2 py-1 bg-yellow-300 text-black text-xs font-black shadow-neo-sm uppercase mt-auto">
-            🎥 Reel
+            {post.type}
           </span>
         )}
       </a>
