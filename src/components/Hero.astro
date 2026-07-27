@@ -1,12 +1,4 @@
 ---
-const languages = [
-  { name: 'Golang', startDate: new Date('2026-06-21') }
-];
-
-const calculateDays = (startDate: Date) => {
-  const diffTime = Math.abs(new Date().getTime() - startDate.getTime());
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-};
 ---
 <section id="hero" class="scroll-mt-24">
   <div class="border-4 border-neo-border p-8 sm:p-12 bg-neo-card shadow-neo">
@@ -16,15 +8,39 @@ const calculateDays = (startDate: Date) => {
           <img src="/images/avatar.png" alt="Vansh Kalawatia" class="w-full h-full object-cover bg-neo-bg" />
         </div>
         
-        <!-- Language Experience Counter -->
-        <div class="flex flex-col gap-2">
-          {languages.map((lang) => (
-            <div class="border-2 border-neo-border bg-neo-bg text-neo-text px-3 py-1.5 font-black text-sm shadow-neo-sm flex items-center justify-between">
-              <span class="text-neo-accent uppercase tracking-wide">{lang.name}</span>
-              <span>{String(calculateDays(lang.startDate)).padStart(2, '0')} <span class="text-xs uppercase font-bold opacity-70">Days</span></span>
-            </div>
-          ))}
+        <!-- Tech Being Learned -->
+        <div class="border-2 border-neo-border bg-neo-bg text-neo-text p-3 shadow-neo-sm">
+          <p class="font-black text-xs uppercase tracking-wider text-neo-accent mb-2">Tech I'm Learning</p>
+          <div class="flex flex-wrap gap-1.5 font-bold text-xs">
+            <span class="bg-neo-card px-2 py-1 border border-neo-border">Java</span>
+            <span class="bg-neo-card px-2 py-1 border border-neo-border">Spring Boot</span>
+            <span class="bg-neo-card px-2 py-1 border border-neo-border">SQL</span>
+            <span class="bg-neo-card px-2 py-1 border border-neo-border">Git</span>
+            <span class="bg-neo-card px-2 py-1 border border-neo-border">Linux</span>
+          </div>
         </div>
+
+        <!-- Live GitHub Language Stats -->
+        <div id="github-lang-stats" class="flex flex-col gap-2"></div>
+
+        <!-- Live LeetCode Solved Box -->
+        <a href="https://leetcode.com/u/vanshkalawatia/" target="_blank" id="leetcode-hero-box" class="block border-2 border-neo-border bg-neo-card text-neo-text p-3 shadow-neo-sm hover:translate-y-1 transition-all group mt-2">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-black text-xs uppercase tracking-wider text-yellow-600 dark:text-yellow-400 group-hover:underline flex items-center gap-1.5">
+              <span>⚡</span> LeetCode Solved
+            </span>
+            <span class="text-[10px] bg-yellow-400 text-black font-black px-1.5 py-0.5">LIVE</span>
+          </div>
+          <div class="flex items-center justify-between font-black text-2xl mb-2">
+            <span class="text-sm font-bold opacity-70 uppercase">Total Questions</span>
+            <span id="lc-total-hero">10</span>
+          </div>
+          <div class="flex justify-between gap-1 text-xs font-black pt-2 border-t border-neo-border/40">
+            <span class="bg-green-500/10 text-green-600 dark:text-green-400 px-1.5 py-0.5 border border-green-500/30">Easy: <span id="lc-easy-hero">8</span></span>
+            <span class="bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 px-1.5 py-0.5 border border-yellow-500/30">Med: <span id="lc-med-hero">2</span></span>
+            <span class="bg-red-500/10 text-red-600 dark:text-red-400 px-1.5 py-0.5 border border-red-500/30">Hard: <span id="lc-hard-hero">0</span></span>
+          </div>
+        </a>
       </div>
       
       <div class="flex-1 text-center lg:text-left">
@@ -32,11 +48,11 @@ const calculateDays = (startDate: Date) => {
         <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase text-neo-accent leading-none">Kalawatia</h2>
         
         <div class="inline-block text-xl md:text-2xl font-bold mb-6 border-l-4 lg:border-l-0 lg:border-l-4 border-neo-border pl-4 text-left">
-          B.Tech CS '28 | Backend Focus on scalable APIs, microservices, and databases.
+          3rd-year Computer Science student. Just starting out with backend development — Java and Spring Boot.
         </div>
         
-        <p class="text-lg mb-8 max-w-2xl font-medium leading-relaxed text-left">
-          Actively studying Go—prioritizing core language mechanics, memory management, and data structures before scaling to distributed system architecture.
+        <p class="text-lg mb-8 max-w-2xl font-bold leading-relaxed text-left bg-yellow-300 dark:bg-yellow-500 text-black p-4 border-2 border-neo-border shadow-neo-sm">
+          ⚠️ Not claiming expertise here. This is a learning log, not a portfolio yet.
         </p>
         
         <div class="flex justify-center lg:justify-start mb-8">
@@ -53,3 +69,81 @@ const calculateDays = (startDate: Date) => {
     </div>
   </div>
 </section>
+
+<script>
+  async function fetchGitHubLanguages() {
+    const container = document.getElementById('github-lang-stats');
+    if (!container) return;
+    try {
+      const res = await fetch('https://api.github.com/users/vanshkalawatia/repos?sort=created&direction=asc');
+      if (!res.ok) return;
+      const repos = await res.json();
+      
+      const langDates: Record<string, Date> = {};
+      
+      repos.forEach((repo: any) => {
+        if (repo.language && !langDates[repo.language]) {
+          langDates[repo.language] = new Date(repo.created_at);
+        }
+      });
+      
+      const now = new Date().getTime();
+      const entries = Object.entries(langDates).map(([lang, date]) => {
+        const days = Math.max(1, Math.ceil((now - date.getTime()) / (1000 * 60 * 60 * 24)));
+        return { lang, days };
+      });
+
+      if (entries.length > 0) {
+        container.innerHTML = `
+          <div class="border-2 border-neo-border bg-neo-bg text-neo-text p-2 shadow-neo-sm mb-1 font-black text-xs uppercase tracking-wider text-neo-accent flex items-center justify-between">
+            <span>Live GitHub Language Days</span>
+            <span class="text-[10px] bg-neo-accent text-white px-1 py-0.5">SYNCED</span>
+          </div>
+        ` + entries.map(({ lang, days }) => `
+          <div class="border-2 border-neo-border bg-neo-bg text-neo-text px-3 py-1.5 font-black text-sm shadow-neo-sm flex items-center justify-between">
+            <span class="text-neo-accent uppercase tracking-wide">${lang}</span>
+            <span>${String(days).padStart(2, '0')} <span class="text-xs uppercase font-bold opacity-70">Days</span></span>
+          </div>
+        `).join('');
+      }
+    } catch (e) {
+      console.error('Failed to sync GitHub language stats:', e);
+    }
+  }
+
+  async function fetchLeetCodeHeroStats() {
+    try {
+      let data: any = null;
+      try {
+        const res1 = await fetch('https://leetcode-api-faisalshohag.vercel.app/vanshkalawatia');
+        if (res1.ok) data = await res1.json();
+      } catch (err) {}
+      
+      if (!data || data.totalSolved === undefined) {
+        const res2 = await fetch('https://alfa-leetcode-api.onrender.com/vanshkalawatia/solved');
+        if (res2.ok) {
+          const d = await res2.json();
+          data = { totalSolved: d.solvedProblem, easySolved: d.easySolved, mediumSolved: d.mediumSolved, hardSolved: d.hardSolved };
+        }
+      }
+
+      if (data && data.totalSolved !== undefined) {
+        const totalEl = document.getElementById('lc-total-hero');
+        const easyEl = document.getElementById('lc-easy-hero');
+        const medEl = document.getElementById('lc-med-hero');
+        const hardEl = document.getElementById('lc-hard-hero');
+        if (totalEl) totalEl.textContent = String(data.totalSolved);
+        if (easyEl) easyEl.textContent = String(data.easySolved);
+        if (medEl) medEl.textContent = String(data.mediumSolved);
+        if (hardEl) hardEl.textContent = String(data.hardSolved);
+      }
+    } catch (e) {
+      console.error('Failed to sync LeetCode hero stats:', e);
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchGitHubLanguages();
+    fetchLeetCodeHeroStats();
+  });
+</script>

@@ -1,53 +1,53 @@
 ---
-const timeline = [
-  {
-    role: 'Backend Developer (Go)',
-    company: 'Projects & Open Source',
-    period: 'Present',
-    description: 'Building security focused CLI applications.',
-    tags: ['Go']
-  },
-  {
-    role: 'Bachelor of Technology (B.Tech)',
-    company: 'Computer Science Engineering',
-    period: 'Student',
-    description: 'Focused on Data Structures, Algorithms, Operating Systems, and Database Management Systems. Strong foundation in core CS principles.',
-    tags: ['CS Core', 'System Design' ,'DSA']
-  }
+const certs = [
+  { title: 'Programming in Java', issuer: 'NPTEL — IIT Kharagpur' },
+  { title: 'Introduction to Database Systems', issuer: 'NPTEL — IIT Madras' },
+  { title: 'Foundations of Cryptography', issuer: 'NPTEL — IIIT Bangalore' }
 ];
 ---
 <section id="experience" class="scroll-mt-24">
   <div class="flex items-center gap-4 mb-12">
-    <h2 class="text-4xl font-black uppercase tracking-tight">Experience & Education</h2>
+    <h2 class="text-4xl font-black uppercase tracking-tight">Where I Am Right Now</h2>
     <div class="h-2 flex-1 bg-neo-border mt-2"></div>
   </div>
 
-  <div class="space-y-12 pl-4 border-l-4 border-neo-border ml-4">
-    {timeline.map((item) => (
-      <div class="relative pl-8">
-        <div class="absolute -left-3.5 top-2 w-6 h-6 bg-neo-accent border-4 border-neo-border rounded-none shadow-neo-sm"></div>
-        <div class="bg-neo-card border-4 border-neo-border p-6 sm:p-8 shadow-neo transform transition-transform hover:-translate-y-1 hover:shadow-neo-lg">
-          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
-            <div>
-              <h3 class="text-2xl font-black mb-1">{item.role}</h3>
-              <p class="text-xl font-bold opacity-80">{item.company}</p>
-            </div>
-            <span class="inline-block border-2 border-neo-border px-4 py-1.5 bg-neo-bg font-bold mt-4 sm:mt-0 whitespace-nowrap shadow-neo-sm uppercase">
-              {item.period}
-            </span>
-          </div>
-          <p class="text-lg font-medium mb-6">
-            {item.description}
-          </p>
-          <div class="flex flex-wrap gap-3">
-            {item.tags.map((tag) => (
-              <span class="border-2 border-neo-border px-3 py-1 bg-neo-accent text-white text-sm font-bold shadow-neo-sm uppercase tracking-wide">
-                {tag}
-              </span>
-            ))}
-          </div>
+  <div class="space-y-12">
+    <!-- Phase 1 Card -->
+    <div class="bg-neo-card border-4 border-neo-border p-6 sm:p-8 shadow-neo">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <span class="border-2 border-neo-border px-3 py-1 bg-neo-accent text-white text-xs font-black shadow-neo-sm uppercase tracking-wide">Current Status</span>
+          <h3 class="text-3xl font-black mt-3">Phase 1 — Foundation (M1–M3)</h3>
         </div>
       </div>
-    ))}
+      <p class="text-lg font-medium mb-6 leading-relaxed">
+        Building a rock-solid foundation in core Computer Science and Backend concepts before jumping into complex frameworks or distributed systems. Focusing on writing clean OOP code, understanding databases, and mastering command-line workflows.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="border border-neo-border px-3 py-1 bg-neo-bg font-bold text-sm uppercase">Java OOP</span>
+        <span class="border border-neo-border px-3 py-1 bg-neo-bg font-bold text-sm uppercase">Collections Framework</span>
+        <span class="border border-neo-border px-3 py-1 bg-neo-bg font-bold text-sm uppercase">SQL & Relational DBs</span>
+        <span class="border border-neo-border px-3 py-1 bg-neo-bg font-bold text-sm uppercase">Git & Linux Basics</span>
+        <span class="border border-neo-border px-3 py-1 bg-neo-bg font-bold text-sm uppercase">Spring Boot (Intro)</span>
+      </div>
+    </div>
+
+    <!-- Certifications Section -->
+    <div>
+      <h3 class="text-2xl font-black uppercase mb-6 tracking-tight flex items-center gap-2">
+        <span>Certifications Completed So Far</span>
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        {certs.map((cert) => (
+          <div class="bg-neo-card border-4 border-neo-border p-5 shadow-neo-sm flex flex-col justify-between">
+            <h4 class="font-black text-lg mb-2">{cert.title}</h4>
+            <p class="text-sm font-bold opacity-75">{cert.issuer}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-sm font-bold italic opacity-80 border-l-4 border-neo-border pl-4">
+        * Completed as part of coursework — still refreshing the material properly, not treating these as mastery.
+      </p>
+    </div>
   </div>
 </section>

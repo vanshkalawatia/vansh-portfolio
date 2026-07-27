@@ -1,0 +1,127 @@
+---
+---
+
+<section id="leetcode" class="scroll-mt-24 mb-24">
+  <div class="flex items-center gap-4 mb-12">
+    <h2 class="text-4xl font-black uppercase tracking-tight">LeetCode Practice</h2>
+    <div class="h-2 flex-1 bg-neo-border mt-2"></div>
+  </div>
+
+  <div class="bg-neo-card border-4 border-neo-border p-6 sm:p-8 shadow-neo mb-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 pb-6 border-b-4 border-neo-border">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-2xl">⚡</span>
+          <h3 class="text-2xl sm:text-3xl font-black uppercase tracking-tight">Data Structures & Algorithms</h3>
+          <span class="bg-yellow-400 text-black text-xs font-black px-2 py-0.5 border-2 border-neo-border uppercase ml-2">Live Sync</span>
+        </div>
+        <p class="text-lg font-bold opacity-80 max-w-2xl">
+          Solving DSA problems in Java to strengthen core problem-solving fundamentals alongside Spring Boot backend development.
+        </p>
+      </div>
+      
+      <a 
+        href="https://leetcode.com/u/vanshkalawatia/" 
+        target="_blank"
+        class="border-4 border-neo-border px-6 py-3 bg-[#ffa116] text-black font-black uppercase shadow-neo-sm hover:translate-y-1 hover:shadow-none transition-all flex items-center gap-2 flex-shrink-0"
+      >
+        <span>View LeetCode Profile</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+      <div class="bg-neo-bg border-4 border-neo-border p-4 shadow-neo-sm text-center">
+        <p class="text-xs font-black uppercase tracking-wider text-neo-accent mb-1">Total Solved</p>
+        <p id="lc-sec-total" class="text-4xl font-black">10</p>
+      </div>
+      
+      <div class="bg-neo-bg border-4 border-neo-border p-4 shadow-neo-sm text-center">
+        <p class="text-xs font-black uppercase tracking-wider text-green-500 mb-1">Easy</p>
+        <p id="lc-sec-easy" class="text-4xl font-black text-green-500">8</p>
+      </div>
+      
+      <div class="bg-neo-bg border-4 border-neo-border p-4 shadow-neo-sm text-center">
+        <p class="text-xs font-black uppercase tracking-wider text-yellow-500 mb-1">Medium</p>
+        <p id="lc-sec-med" class="text-4xl font-black text-yellow-500">2</p>
+      </div>
+      
+      <div class="bg-neo-bg border-4 border-neo-border p-4 shadow-neo-sm text-center">
+        <p class="text-xs font-black uppercase tracking-wider text-red-500 mb-1">Hard</p>
+        <p id="lc-sec-hard" class="text-4xl font-black text-red-500">0</p>
+      </div>
+    </div>
+
+    <!-- Recent Submissions List -->
+    <div>
+      <h4 class="text-xl font-black uppercase mb-4 flex items-center gap-2">
+        <span>📝</span> Recent Accepted Solutions (Java)
+      </h4>
+      <div id="lc-sec-recent" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Default fallback recent items -->
+        <a href="https://leetcode.com/problems/product-of-array-except-self" target="_blank" class="border-2 border-neo-border bg-neo-bg p-3 shadow-neo-sm flex items-center justify-between hover:translate-x-1 transition-transform">
+          <span class="font-bold text-sm">Product of Array Except Self</span>
+          <span class="bg-green-500/20 text-green-500 text-xs font-black px-2 py-0.5 border border-green-500/40">JAVA</span>
+        </a>
+        <a href="https://leetcode.com/problems/contains-duplicate" target="_blank" class="border-2 border-neo-border bg-neo-bg p-3 shadow-neo-sm flex items-center justify-between hover:translate-x-1 transition-transform">
+          <span class="font-bold text-sm">Contains Duplicate</span>
+          <span class="bg-green-500/20 text-green-500 text-xs font-black px-2 py-0.5 border border-green-500/40">JAVA</span>
+        </a>
+        <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock" target="_blank" class="border-2 border-neo-border bg-neo-bg p-3 shadow-neo-sm flex items-center justify-between hover:translate-x-1 transition-transform">
+          <span class="font-bold text-sm">Best Time to Buy and Sell Stock</span>
+          <span class="bg-green-500/20 text-green-500 text-xs font-black px-2 py-0.5 border border-green-500/40">JAVA</span>
+        </a>
+        <a href="https://leetcode.com/problems/two-sum" target="_blank" class="border-2 border-neo-border bg-neo-bg p-3 shadow-neo-sm flex items-center justify-between hover:translate-x-1 transition-transform">
+          <span class="font-bold text-sm">Two Sum</span>
+          <span class="bg-green-500/20 text-green-500 text-xs font-black px-2 py-0.5 border border-green-500/40">JAVA</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  async function fetchLeetCodeSection() {
+    try {
+      const res = await fetch('https://leetcode-api-faisalshohag.vercel.app/vanshkalawatia');
+      if (!res.ok) return;
+      const data = await res.json();
+      
+      if (data.totalSolved !== undefined) {
+        const t = document.getElementById('lc-sec-total');
+        const e = document.getElementById('lc-sec-easy');
+        const m = document.getElementById('lc-sec-med');
+        const h = document.getElementById('lc-sec-hard');
+        if (t) t.textContent = String(data.totalSolved);
+        if (e) e.textContent = String(data.easySolved);
+        if (m) m.textContent = String(data.mediumSolved);
+        if (h) h.textContent = String(data.hardSolved);
+      }
+
+      if (data.recentSubmissions && Array.isArray(data.recentSubmissions)) {
+        const accepted = data.recentSubmissions
+          .filter((sub: any) => sub.statusDisplay === 'Accepted')
+          .slice(0, 6);
+          
+        if (accepted.length > 0) {
+          const container = document.getElementById('lc-sec-recent');
+          if (container) {
+            container.innerHTML = accepted.map((sub: any) => `
+              <a href="https://leetcode.com/problems/${sub.titleSlug}" target="_blank" class="border-2 border-neo-border bg-neo-bg p-3 shadow-neo-sm flex items-center justify-between hover:translate-x-1 transition-transform animate-fadeIn">
+                <span class="font-bold text-sm truncate mr-2">${sub.title}</span>
+                <span class="bg-green-500/20 text-green-500 text-xs font-black px-2 py-0.5 border border-green-500/40 uppercase flex-shrink-0">${sub.lang || 'JAVA'}</span>
+              </a>
+            `).join('');
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Failed to sync LeetCode section:', e);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchLeetCodeSection);
+</script>

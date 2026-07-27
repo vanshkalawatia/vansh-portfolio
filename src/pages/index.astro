@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Experience from '../components/Experience.astro';
+import LeetCode from '../components/LeetCode.astro';
 import Projects from '../components/Projects.astro';
 import Activity from '../components/Activity.astro';
 import BlogFeed from '../components/BlogFeed.astro';
@@ -11,52 +12,9 @@ import Contact from '../components/Contact.astro';
 <Layout title="Vansh Kalawatia | Backend Developer">
   <Hero />
   <Experience />
+  <LeetCode />
   <Projects />
   <Activity />
   <BlogFeed />
   <Contact />
-  
-  <div class="mt-24 mb-12 flex justify-center h-16 items-center">
-    <a href="/dark-side" id="dark-side-btn" class="hidden group relative bg-neo-bg text-neo-text font-black text-sm px-6 py-3 border-4 border-neo-border shadow-neo hover:translate-y-1 hover:translate-x-1 hover:shadow-neo-sm active:translate-y-2 active:translate-x-2 active:shadow-none transition-all uppercase tracking-widest overflow-hidden">
-      <span class="relative z-10 flex items-center gap-2">
-        Enter the Dark Side
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-        </svg>
-      </span>
-    </a>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('dark-side-btn');
-      if (!btn) return;
-      
-      const targets = [
-        'mailto:vanshkalawatia2@gmail.com',
-        'https://github.com/vanshkalawatia',
-        'https://linkedin.com/in/vanshkalawatia',
-        'https://x.com/vansh0x01',
-        'https://instagram.com/vansh0x01'
-      ];
-      
-      const clicked = new Set();
-      
-      targets.forEach(href => {
-        const link = document.querySelector(`a[href="${href}"]`);
-        if (link) {
-          link.addEventListener('click', () => {
-            clicked.add(href);
-            if (clicked.size === targets.length) {
-              btn.classList.remove('hidden');
-              btn.classList.add('inline-block');
-              setTimeout(() => {
-                btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }, 500);
-            }
-          });
-        }
-      });
-    });
-  </script>
 </Layout>

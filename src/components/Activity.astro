@@ -1,37 +1,24 @@
 ---
-import socialPosts from '../data/socialPosts.json';
-
-const platformColors: Record<string, string> = {
-  'X': 'bg-neo-text text-neo-bg',
-  'Instagram': 'bg-pink-500 text-white',
-  'LinkedIn': 'bg-[#0a66c2] text-white',
-  'Linkedin': 'bg-[#0a66c2] text-white',
-};
 ---
 <section id="activity" class="scroll-mt-24">
   <div class="flex items-center gap-4 mb-12">
-    <h2 class="text-4xl font-black uppercase tracking-tight">Activity Feed</h2>
+    <h2 class="text-4xl font-black uppercase tracking-tight">What This Profile Is For</h2>
     <div class="h-2 flex-1 bg-neo-border mt-2"></div>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {socialPosts.map((post) => (
-      <a href={post.link} target="_blank" class="block bg-neo-card border-4 border-neo-border p-6 shadow-neo hover:-translate-y-1 hover:shadow-neo-lg transition-all group flex flex-col">
-        <div class="flex justify-between items-start mb-4">
-          <span class={`font-black uppercase text-sm border-2 border-neo-border px-2 py-1 shadow-neo-sm ${platformColors[post.platform] || 'bg-neo-accent text-white'}`}>
-            {post.platform}
-          </span>
-          <span class="text-sm font-bold opacity-60">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-        </div>
-        <p class="font-medium text-lg mb-4 flex-1 group-hover:text-neo-accent transition-colors">
-          "{post.content}"
-        </p>
-        {post.type && (
-          <span class="inline-block w-max border-2 border-neo-border px-2 py-1 bg-yellow-300 text-black text-xs font-black shadow-neo-sm uppercase mt-auto">
-            {post.type}
-          </span>
-        )}
-      </a>
-    ))}
+  <div class="bg-neo-card border-4 border-neo-border p-8 shadow-neo">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-2xl">🌱</span>
+      <h3 class="text-2xl font-black uppercase">Learning Log & Progress Tracker</h3>
+    </div>
+    <p class="font-bold text-xl leading-relaxed opacity-90 border-l-4 border-neo-accent pl-4 py-1 mb-6">
+      Committing small exercises and progress here as I go through Git, SQL, and Java basics. No polished projects yet — that comes later as the fundamentals solidify.
+    </p>
+    <div class="flex flex-wrap gap-2 text-sm font-bold uppercase">
+      <span class="bg-neo-bg border-2 border-neo-border px-3 py-1 shadow-neo-sm">Small Exercises</span>
+      <span class="bg-neo-bg border-2 border-neo-border px-3 py-1 shadow-neo-sm">Git Practice</span>
+      <span class="bg-neo-bg border-2 border-neo-border px-3 py-1 shadow-neo-sm">SQL Queries</span>
+      <span class="bg-neo-bg border-2 border-neo-border px-3 py-1 shadow-neo-sm">Java OOP Mechanics</span>
+    </div>
   </div>
 </section>
