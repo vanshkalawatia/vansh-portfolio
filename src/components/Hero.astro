@@ -82,7 +82,10 @@
       const langDates: Record<string, Date> = {};
       
       repos.forEach((repo: any) => {
-        if (repo.language && !langDates[repo.language]) {
+        const n = repo.name.toLowerCase();
+        if (n.includes('portfolio') || n.includes('astro') || n.includes('website') || n.includes('github.io')) return;
+        const ignoreLangs = ['astro', 'html', 'css', 'scss', 'vue', 'svelte'];
+        if (repo.language && !ignoreLangs.includes(repo.language.toLowerCase()) && !langDates[repo.language]) {
           langDates[repo.language] = new Date(repo.created_at);
         }
       });

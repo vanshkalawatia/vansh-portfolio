@@ -56,7 +56,12 @@ import projects from '../data/projects.json';
       const existingLinks = Array.from(grid.querySelectorAll('a[href]')).map(a => (a as HTMLAnchorElement).href);
       
       const newCards = repos
-        .filter((repo: any) => !repo.fork && !existingLinks.includes(repo.html_url))
+        .filter((repo: any) => {
+          if (repo.fork || existingLinks.includes(repo.html_url)) return false;
+          const n = repo.name.toLowerCase();
+          if (n.includes('portfolio') || n.includes('astro') || n.includes('website') || n.includes('github.io')) return false;
+          return true;
+        })
         .slice(0, 6)
         .map((repo: any) => {
           const tags = [repo.language || 'Code', 'GitHub Live'];
