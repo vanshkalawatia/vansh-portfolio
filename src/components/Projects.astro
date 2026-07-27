@@ -62,7 +62,7 @@ import projects from '../data/projects.json';
           const tags = [repo.language || 'Code', 'GitHub Live'];
           if (repo.stargazers_count > 0) tags.push(`⭐ ${repo.stargazers_count}`);
           
-          const title = repo.name.replace/-/g, ' ');
+          const title = repo.name.replace(/-/g, ' ');
           const desc = repo.description || 'Active learning repository and code commits on GitHub.';
           
           return `
