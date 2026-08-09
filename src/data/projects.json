@@ -1,9 +1,1 @@
-[
-  {
-    "title": "Skill Project 1 — [In Progress]: Student Grade Tracker",
-    "description": "A console app (Java OOP + Collections). Add students, assign marks per subject, calculate averages, rank them, search by name. Forces you to use classes, ArrayLists, Maps, sorting, and basic file I/O to save data. No DB yet — just .txt or .json file persistence. Done when you can run it fresh, add 10 students, and the ranking is correct after a restart.",
-    "tags": ["Java", "OOP", "Collections", "File I/O"],
-    "link": "",
-    "github": "https://github.com/vanshkalawatia"
-  }
-]
+[]
