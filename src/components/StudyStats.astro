@@ -163,7 +163,7 @@
       const tcName = document.getElementById('top-category-name');
       if (tcName) {
         tcName.textContent = topCat.name;
-        tcName.className = \`text-3xl font-black \${topCat.color} mb-2\`;
+        tcName.className = `text-3xl font-black ${topCat.color} mb-2`;
       }
       
       const tcIcon = document.getElementById('top-category-icon');
@@ -191,22 +191,22 @@
         
         // Create stacked bar
         if (chart) {
-          chart.innerHTML += \`
+          chart.innerHTML += `
             <div class="flex-1 flex flex-col justify-end items-center group relative h-full">
               <!-- Tooltip -->
               <div class="absolute -top-10 bg-neo-text text-neo-bg text-[10px] font-black p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap pointer-events-none">
-                \${d.date}: \${d.total.toFixed(1)}h
+                ${d.date}: ${d.total.toFixed(1)}h
               </div>
               
               <div class="w-full sm:w-10 flex flex-col justify-end border-2 border-transparent group-hover:border-neo-text transition-colors cursor-crosshair">
-                \${d.soft > 0 ? \`<div class="w-full bg-green-500 border border-black" style="height: \${softH}px"></div>\` : ''}
-                \${d.apt > 0 ? \`<div class="w-full bg-yellow-400 border border-black" style="height: \${aptH}px"></div>\` : ''}
-                \${d.java > 0 ? \`<div class="w-full bg-red-500 border border-black" style="height: \${javaH}px"></div>\` : ''}
-                \${d.dsa > 0 ? \`<div class="w-full bg-blue-500 border-b border-l border-r border-black" style="height: \${dsaH}px"></div>\` : ''}
+                ${d.soft > 0 ? `<div class="w-full bg-green-500 border border-black" style="height: ${softH}px"></div>` : ''}
+                ${d.apt > 0 ? `<div class="w-full bg-yellow-400 border border-black" style="height: ${aptH}px"></div>` : ''}
+                ${d.java > 0 ? `<div class="w-full bg-red-500 border border-black" style="height: ${javaH}px"></div>` : ''}
+                ${d.dsa > 0 ? `<div class="w-full bg-blue-500 border-b border-l border-r border-black" style="height: ${dsaH}px"></div>` : ''}
               </div>
-              <div class="text-[8px] sm:text-[10px] font-black mt-2 truncate w-full text-center">\${d.date.substring(0, 5)}</div>
+              <div class="text-[8px] sm:text-[10px] font-black mt-2 truncate w-full text-center">${d.date.substring(0, 5)}</div>
             </div>
-          \`;
+          `;
         }
       });
 
