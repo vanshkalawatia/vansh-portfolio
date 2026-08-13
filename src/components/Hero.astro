@@ -23,6 +23,20 @@
         <!-- Live GitHub Language Stats -->
         <div id="github-lang-stats" class="flex flex-col gap-2"></div>
 
+        <!-- Live Study Streak Box -->
+        <a href="#stats" class="block border-2 border-neo-border bg-neo-card text-neo-text p-3 shadow-neo-sm hover:translate-y-1 transition-all group mt-2">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-black text-xs uppercase tracking-wider text-red-600 dark:text-red-400 group-hover:underline flex items-center gap-1.5">
+              <span>🔥</span> Study Streak
+            </span>
+            <span class="text-[10px] bg-yellow-400 text-black font-black px-1.5 py-0.5 animate-pulse">LIVE</span>
+          </div>
+          <div class="flex items-center justify-between font-black text-2xl">
+            <span class="text-sm font-bold opacity-70 uppercase">Consecutive Days</span>
+            <span id="hero-streak-counter" class="text-red-500">0</span>
+          </div>
+        </a>
+
         <!-- Live LeetCode Solved Box -->
         <a href="https://leetcode.com/u/vanshkalawatia/" target="_blank" id="leetcode-hero-box" class="block border-2 border-neo-border bg-neo-card text-neo-text p-3 shadow-neo-sm hover:translate-y-1 transition-all group mt-2">
           <div class="flex items-center justify-between mb-2">

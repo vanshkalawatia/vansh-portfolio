@@ -160,6 +160,9 @@
       const streakEl = document.getElementById('streak-counter');
       if (streakEl) streakEl.textContent = streak.toString();
       
+      const heroStreakEl = document.getElementById('hero-streak-counter');
+      if (heroStreakEl) heroStreakEl.textContent = streak.toString();
+      
       const tcName = document.getElementById('top-category-name');
       if (tcName) {
         tcName.textContent = topCat.name;
