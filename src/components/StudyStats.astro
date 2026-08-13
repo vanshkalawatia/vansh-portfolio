@@ -1,0 +1,212 @@
+---
+---
+<section id="stats" class="scroll-mt-24 mb-24">
+  <div class="flex items-center gap-4 mb-12">
+    <h2 class="text-4xl font-black uppercase tracking-tight">Consistency Tracker</h2>
+    <div class="h-2 flex-1 bg-neo-border mt-2"></div>
+  </div>
+
+  <div class="bg-neo-card border-4 border-neo-border p-6 sm:p-8 shadow-neo mb-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 pb-6 border-b-4 border-neo-border">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-2xl">🔥</span>
+          <h3 class="text-2xl sm:text-3xl font-black uppercase tracking-tight">Daily 4-Hour Challenge</h3>
+          <span class="bg-yellow-400 text-black text-xs font-black px-2 py-0.5 border-2 border-neo-border uppercase ml-2 animate-pulse">Live</span>
+        </div>
+        <p class="text-lg font-bold opacity-80 max-w-2xl">
+          Tracking my daily study hours for DSA, Java, Aptitude, and Soft Skills. Synced directly from my personal Google Sheet.
+        </p>
+      </div>
+      
+      <div class="border-4 border-neo-border px-6 py-4 bg-neo-bg text-center shadow-neo-sm">
+        <p class="text-xs font-black uppercase tracking-wider text-neo-accent mb-1">Current Streak</p>
+        <div class="flex items-center justify-center gap-2">
+          <span id="streak-counter" class="text-5xl font-black text-red-500">0</span>
+          <span class="text-xl font-bold uppercase mt-2">Days</span>
+        </div>
+        <p class="text-[10px] font-bold opacity-70 uppercase mt-1">Breaks if total hrs = 0</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Weekly Focus Highlight -->
+      <div class="bg-neo-bg border-4 border-neo-border p-6 shadow-neo-sm flex flex-col justify-center items-center text-center">
+        <p class="text-sm font-black uppercase tracking-wider mb-2">Top Focus This Week</p>
+        <div id="top-category-icon" class="text-6xl mb-4">🏆</div>
+        <h4 id="top-category-name" class="text-3xl font-black text-neo-accent mb-2">Loading...</h4>
+        <p class="text-sm font-bold uppercase"><span id="top-category-hours" class="text-lg">0</span> Hours</p>
+      </div>
+
+      <!-- Custom CSS Bar Chart (Last 7 Days) -->
+      <div class="lg:col-span-2 bg-neo-bg border-4 border-neo-border p-6 shadow-neo-sm flex flex-col">
+        <div class="flex justify-between items-end mb-4">
+          <h4 class="text-lg font-black uppercase tracking-tight">Past 7 Days Breakdown</h4>
+          <span class="text-sm font-bold uppercase bg-neo-border text-neo-bg px-2 py-1">Total: <span id="weekly-total">0</span>h</span>
+        </div>
+        
+        <div class="flex-1 flex items-end gap-2 sm:gap-4 h-48 border-b-2 border-neo-border pb-2 relative" id="chart-container">
+          <!-- Bars injected via JS -->
+          <div class="w-full h-full flex items-center justify-center font-bold animate-pulse">Fetching Google Sheet Data...</div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="flex flex-wrap justify-center gap-4 mt-6 text-xs font-black uppercase">
+          <div class="flex items-center gap-1"><span class="w-3 h-3 bg-blue-500 border border-black"></span> DSA</div>
+          <div class="flex items-center gap-1"><span class="w-3 h-3 bg-red-500 border border-black"></span> Java/OOP</div>
+          <div class="flex items-center gap-1"><span class="w-3 h-3 bg-yellow-400 border border-black"></span> Aptitude</div>
+          <div class="flex items-center gap-1"><span class="w-3 h-3 bg-green-500 border border-black"></span> Soft Skills</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // IMPORTANT: Replace this URL with the correct CSV export link for the "Tracker" sheet specifically!
+  // Example: https://docs.google.com/spreadsheets/d/YOUR_ID/export?format=csv&gid=YOUR_SHEET_GID
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1scZn2IKYMJwy74pDiygRfCBcbcUmp1sKvQvRVU_JqyY/export?format=csv&gid=726205097';
+
+  async function fetchStudyStats() {
+    try {
+      const res = await fetch(SHEET_CSV_URL);
+      if (!res.ok) throw new Error("Failed to fetch CSV");
+      const text = await res.text();
+      
+      const rows = text.split('\n').map(row => {
+        const regex = /(?:\"([^\"]*(?:\"[^\"]*)*)\"|([^,]+|(?=,)))/g;
+        let cols = [];
+        let match;
+        // Simple manual split since regex can be tricky with consecutive empty commas like ,,,,,
+        // Just standard split by comma, ignoring quotes for a moment since the dates are quoted but safe
+        let inQuotes = false;
+        let current = '';
+        for(let c of row) {
+          if (c === '"') inQuotes = !inQuotes;
+          else if (c === ',' && !inQuotes) { cols.push(current); current = ''; }
+          else current += c;
+        }
+        cols.push(current);
+        return cols.map(c => c.trim());
+      }).filter(row => row.length > 3);
+
+      if (rows.length < 2) return;
+
+      const headers = rows[0].map(h => h ? h.toLowerCase().trim() : '');
+      const dsaIdx = headers.findIndex(h => h.includes('dsa'));
+      const javaIdx = headers.findIndex(h => h.includes('java') || h.includes('oop'));
+      const aptIdx = headers.findIndex(h => h.includes('aptitude'));
+      const softIdx = headers.findIndex(h => h.includes('soft') || h.includes('skill'));
+      const totalIdx = headers.findIndex(h => h.includes('total') || h.includes('hr'));
+      
+      const tIdx = totalIdx >= 0 ? totalIdx : 5;
+
+      const data = [];
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || !row[0]) continue;
+        
+        // If all input fields are completely empty, this is an unfilled future date!
+        if (row[dsaIdx] === '' && row[javaIdx] === '' && row[aptIdx] === '' && row[softIdx] === '') {
+          continue; 
+        }
+        
+        const dsa = parseFloat(row[dsaIdx]) || 0;
+        const java = parseFloat(row[javaIdx]) || 0;
+        const apt = parseFloat(row[aptIdx]) || 0;
+        const soft = parseFloat(row[softIdx]) || 0;
+        const total = parseFloat(row[tIdx]) || (dsa + java + apt + soft);
+        
+        data.push({
+          date: row[0].replace(/"/g, ''), // Clean quotes from date
+          dsa, java, apt, soft, total
+        });
+      }
+
+      // Calculate Streak (from bottom up, or assuming chronological)
+      // Usually sheets have oldest at top, newest at bottom. Let's assume bottom is newest.
+      let streak = 0;
+      for (let i = data.length - 1; i >= 0; i--) {
+        if (data[i].total > 0) {
+          streak++;
+        } else {
+          break; // Streak broken!
+        }
+      }
+
+      // Past 7 Days Data
+      const last7 = data.slice(-7);
+      
+      let sumDsa = 0, sumJava = 0, sumApt = 0, sumSoft = 0, sumTotal = 0;
+      last7.forEach(d => {
+        sumDsa += d.dsa;
+        sumJava += d.java;
+        sumApt += d.apt;
+        sumSoft += d.soft;
+        sumTotal += d.total;
+      });
+
+      // Find Top Category
+      const cats = [
+        { name: 'DSA', hrs: sumDsa, color: 'text-blue-500', icon: '🧠' },
+        { name: 'Java/OOP', hrs: sumJava, color: 'text-red-500', icon: '☕' },
+        { name: 'Aptitude', hrs: sumApt, color: 'text-yellow-500', icon: '🧩' },
+        { name: 'Soft Skills', hrs: sumSoft, color: 'text-green-500', icon: '🗣️' }
+      ];
+      cats.sort((a, b) => b.hrs - a.hrs);
+      const topCat = cats[0];
+
+      // Update DOM
+      document.getElementById('streak-counter').textContent = streak.toString();
+      
+      const tcName = document.getElementById('top-category-name');
+      tcName.textContent = topCat.name;
+      tcName.className = \`text-3xl font-black \${topCat.color} mb-2\`;
+      document.getElementById('top-category-icon').textContent = topCat.icon;
+      document.getElementById('top-category-hours').textContent = topCat.hrs.toFixed(1);
+      document.getElementById('weekly-total').textContent = sumTotal.toFixed(1);
+
+      // Render Chart
+      const chart = document.getElementById('chart-container');
+      chart.innerHTML = ''; // Clear loading
+
+      // Find max total to scale bars (min 4 hours for good scale)
+      const maxDayHrs = Math.max(4, ...last7.map(d => d.total));
+
+      last7.forEach(d => {
+        const maxH = 160; // Max pixels height
+        const dsaH = (d.dsa / maxDayHrs) * maxH;
+        const javaH = (d.java / maxDayHrs) * maxH;
+        const aptH = (d.apt / maxDayHrs) * maxH;
+        const softH = (d.soft / maxDayHrs) * maxH;
+        
+        // Create stacked bar
+        chart.innerHTML += \`
+          <div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+            <!-- Tooltip -->
+            <div class="absolute -top-10 bg-neo-text text-neo-bg text-[10px] font-black p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap pointer-events-none">
+              \${d.date}: \${d.total.toFixed(1)}h
+            </div>
+            
+            <div class="w-full sm:w-10 flex flex-col justify-end border-2 border-transparent group-hover:border-neo-text transition-colors cursor-crosshair">
+              \${d.soft > 0 ? \`<div class="w-full bg-green-500 border border-black" style="height: \${softH}px"></div>\` : ''}
+              \${d.apt > 0 ? \`<div class="w-full bg-yellow-400 border border-black" style="height: \${aptH}px"></div>\` : ''}
+              \${d.java > 0 ? \`<div class="w-full bg-red-500 border border-black" style="height: \${javaH}px"></div>\` : ''}
+              \${d.dsa > 0 ? \`<div class="w-full bg-blue-500 border-b border-l border-r border-black" style="height: \${dsaH}px"></div>\` : ''}
+            </div>
+            <div class="text-[8px] sm:text-[10px] font-black mt-2 truncate w-full text-center">\${d.date.substring(0, 5)}</div>
+          </div>
+        \`;
+      });
+
+    } catch (err) {
+      console.error("Failed to load Study Stats:", err);
+      const chart = document.getElementById('chart-container');
+      if (chart) chart.innerHTML = '<div class="w-full text-center font-bold text-red-500">Failed to load Google Sheet data. Ensure the CSV link is correct and public.</div>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchStudyStats);
+</script>
