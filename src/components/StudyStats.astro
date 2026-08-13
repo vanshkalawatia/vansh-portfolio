@@ -76,9 +76,7 @@
       const text = await res.text();
       
       const rows = text.split('\n').map(row => {
-        const regex = /(?:\"([^\"]*(?:\"[^\"]*)*)\"|([^,]+|(?=,)))/g;
         let cols = [];
-        let match;
         // Simple manual split since regex can be tricky with consecutive empty commas like ,,,,,
         // Just standard split by comma, ignoring quotes for a moment since the dates are quoted but safe
         let inQuotes = false;
@@ -159,18 +157,27 @@
       const topCat = cats[0];
 
       // Update DOM
-      document.getElementById('streak-counter').textContent = streak.toString();
+      const streakEl = document.getElementById('streak-counter');
+      if (streakEl) streakEl.textContent = streak.toString();
       
       const tcName = document.getElementById('top-category-name');
-      tcName.textContent = topCat.name;
-      tcName.className = \`text-3xl font-black \${topCat.color} mb-2\`;
-      document.getElementById('top-category-icon').textContent = topCat.icon;
-      document.getElementById('top-category-hours').textContent = topCat.hrs.toFixed(1);
-      document.getElementById('weekly-total').textContent = sumTotal.toFixed(1);
+      if (tcName) {
+        tcName.textContent = topCat.name;
+        tcName.className = \`text-3xl font-black \${topCat.color} mb-2\`;
+      }
+      
+      const tcIcon = document.getElementById('top-category-icon');
+      if (tcIcon) tcIcon.textContent = topCat.icon;
+      
+      const tcHours = document.getElementById('top-category-hours');
+      if (tcHours) tcHours.textContent = topCat.hrs.toFixed(1);
+      
+      const wkTotal = document.getElementById('weekly-total');
+      if (wkTotal) wkTotal.textContent = sumTotal.toFixed(1);
 
       // Render Chart
       const chart = document.getElementById('chart-container');
-      chart.innerHTML = ''; // Clear loading
+      if (chart) chart.innerHTML = ''; // Clear loading
 
       // Find max total to scale bars (min 4 hours for good scale)
       const maxDayHrs = Math.max(4, ...last7.map(d => d.total));
@@ -183,22 +190,24 @@
         const softH = (d.soft / maxDayHrs) * maxH;
         
         // Create stacked bar
-        chart.innerHTML += \`
-          <div class="flex-1 flex flex-col justify-end items-center group relative h-full">
-            <!-- Tooltip -->
-            <div class="absolute -top-10 bg-neo-text text-neo-bg text-[10px] font-black p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap pointer-events-none">
-              \${d.date}: \${d.total.toFixed(1)}h
+        if (chart) {
+          chart.innerHTML += \`
+            <div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+              <!-- Tooltip -->
+              <div class="absolute -top-10 bg-neo-text text-neo-bg text-[10px] font-black p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap pointer-events-none">
+                \${d.date}: \${d.total.toFixed(1)}h
+              </div>
+              
+              <div class="w-full sm:w-10 flex flex-col justify-end border-2 border-transparent group-hover:border-neo-text transition-colors cursor-crosshair">
+                \${d.soft > 0 ? \`<div class="w-full bg-green-500 border border-black" style="height: \${softH}px"></div>\` : ''}
+                \${d.apt > 0 ? \`<div class="w-full bg-yellow-400 border border-black" style="height: \${aptH}px"></div>\` : ''}
+                \${d.java > 0 ? \`<div class="w-full bg-red-500 border border-black" style="height: \${javaH}px"></div>\` : ''}
+                \${d.dsa > 0 ? \`<div class="w-full bg-blue-500 border-b border-l border-r border-black" style="height: \${dsaH}px"></div>\` : ''}
+              </div>
+              <div class="text-[8px] sm:text-[10px] font-black mt-2 truncate w-full text-center">\${d.date.substring(0, 5)}</div>
             </div>
-            
-            <div class="w-full sm:w-10 flex flex-col justify-end border-2 border-transparent group-hover:border-neo-text transition-colors cursor-crosshair">
-              \${d.soft > 0 ? \`<div class="w-full bg-green-500 border border-black" style="height: \${softH}px"></div>\` : ''}
-              \${d.apt > 0 ? \`<div class="w-full bg-yellow-400 border border-black" style="height: \${aptH}px"></div>\` : ''}
-              \${d.java > 0 ? \`<div class="w-full bg-red-500 border border-black" style="height: \${javaH}px"></div>\` : ''}
-              \${d.dsa > 0 ? \`<div class="w-full bg-blue-500 border-b border-l border-r border-black" style="height: \${dsaH}px"></div>\` : ''}
-            </div>
-            <div class="text-[8px] sm:text-[10px] font-black mt-2 truncate w-full text-center">\${d.date.substring(0, 5)}</div>
-          </div>
-        \`;
+          \`;
+        }
       });
 
     } catch (err) {
