@@ -80,29 +80,30 @@ html {
 }
 
 html[data-color-mode="light"] {
-  --background: 60 20% 98%;
-  --foreground: 60 7% 7%;
+  /* Warm editorial cream / ivory canvas */
+  --background: 42 35% 95%;
+  --foreground: 35 15% 12%;
 
-  --card: 0 0% 100%;
-  --card-foreground: 60 7% 7%;
+  --card: 40 35% 98.5%;
+  --card-foreground: 35 15% 12%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 60 7% 7%;
+  --popover: 40 35% 98.5%;
+  --popover-foreground: 35 15% 12%;
 
   --primary: 233 73% 48%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 60 14% 94%;
-  --secondary-foreground: 60 7% 12%;
+  --secondary: 40 24% 90%;
+  --secondary-foreground: 35 15% 14%;
 
-  --muted: 60 14% 94%;
-  --muted-foreground: 60 4% 38%;
+  --muted: 40 24% 90%;
+  --muted-foreground: 38 12% 40%;
 
   --accent: 233 73% 48%;
   --accent-foreground: 0 0% 100%;
 
-  --border: 55 15% 84%;
-  --input: 55 15% 84%;
+  --border: 40 18% 82%;
+  --input: 40 18% 82%;
   --ring: 233 73% 48%;
 
   /* Light surfaces: the traces are already a dark accent, so a white core
