@@ -31,10 +31,6 @@ import { NeuralBrain } from "@/components/NeuralBrain";
 import { useCanAnimate, useAnimeOnView, useInView } from "@/lib/use-anime";
 import { scrollToSection } from "@/lib/scroll-to";
 
-const MemoryFlipCards = lazy(() =>
-  import("@/components/MemoryFlipCards").then((m) => ({ default: m.MemoryFlipCards }))
-);
-
 const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
@@ -176,7 +172,11 @@ export default function Home() {
                 <span aria-hidden="true" className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-primary" />
                 <span aria-hidden="true" className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-primary" />
                 <motion.img
-                  src={personalInfo.avatarUrl}
+                  src={
+                    personalInfo.avatarUrl.startsWith("http")
+                      ? personalInfo.avatarUrl
+                      : `${import.meta.env.BASE_URL || "./"}${personalInfo.avatarUrl.replace(/^\.?\//, "")}`
+                  }
                   alt={personalInfo.name}
                   loading="eager"
                   decoding="async"
@@ -357,16 +357,6 @@ export default function Home() {
               }}
             />
           </motion.div>
-        </section>
-
-        {/* ============ FUN & GAMES ============ */}
-        <section id="games" className="rule-t py-20 md:py-28 cv-auto">
-          <SectionHeading title="Fun & Games" subtitle="Take a break and test your memory" />
-          <div className="flex justify-center">
-            <Suspense fallback={null}>
-              <MemoryFlipCards />
-            </Suspense>
-          </div>
         </section>
 
         {/* ============ CONTACT ============ */}

@@ -25,10 +25,8 @@ const sectionNumbers: Record<string, number> = {
   background: 5,
   education: 5,
   "beyond-code": 6,
-  "fun-&-games": 7,
-  "fun-games": 7,
-  "get-in-touch": 8,
-  contact: 8,
+  "get-in-touch": 7,
+  contact: 7,
 };
 
 /** Hand-drawn accent stroke that sketches itself under the title on scroll. */

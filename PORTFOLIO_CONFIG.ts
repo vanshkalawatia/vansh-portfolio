@@ -93,7 +93,7 @@ export const personalInfo: PersonalInfo = {
   twitter: "https://x.com/vansh0x00",
   instagram: "https://www.instagram.com/vansh0x00/",
   location: "India (UTC+5:30)",
-  avatarUrl: "/images/avatar.jpg",
+  avatarUrl: "image/avatar.jpg",
   resumeUrl: "",
 };
 
@@ -173,7 +173,7 @@ export const projectsData: ProjectItem[] = [
 export const skillsData: SkillCategory[] = [
   {
     id: 1,
-    category: "Python & Backend",
+    category: "Python ",
     items: [
       "Python 3",
       // "FastAPI",
@@ -184,7 +184,7 @@ export const skillsData: SkillCategory[] = [
     ],
   },
   {
-    id: 2,
+    id: 4,
     category: "Security Fundamentals",
     items: [
       "Foundations of Cryptography",
@@ -204,17 +204,17 @@ export const skillsData: SkillCategory[] = [
       // "SQLAlchemy / ORM basics",
     ],
   },
-  {
-    id: 4,
-    category: "DSA & Problem Solving",
-    items: [
-      // "Arrays & Strings",
-      // "Hash Maps & Sets",
-      // "Two Pointers",
-      // "Sliding Window",
-      // "Sorting & Searching",
-    ],
-  },
+  // {
+  //   id: 4,
+  //   category: "DSA & Problem Solving",
+  //   items: [
+  //     // "Arrays & Strings",
+  //     // "Hash Maps & Sets",
+  //     // "Two Pointers",
+  //     // "Sliding Window",
+  //     // "Sorting & Searching",
+  //   ],
+  // },
   // {
   //   id: 5,
   //   category: "DevOps & Tools",
@@ -236,6 +236,15 @@ export const skillsData: SkillCategory[] = [
       // "React Basics",
     ],
   },
+
+  {
+    id: 2,
+    category: "Language",
+    items: [
+      "Python",
+      "Java",
+    ]
+  }
 ];
 
 // ------------------------------------------------------------------------
