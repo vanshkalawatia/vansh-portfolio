@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { animate, stagger } from "animejs";
 import {
@@ -260,13 +261,13 @@ export default function Home() {
                 ))}
               </div>
               <div className="text-center mt-10">
-                <a
-                  href="/works/"
+                <Link
+                  href="/works"
                   className="btn-push inline-flex items-center gap-2 px-8 py-3.5 border border-border rounded-full font-semibold text-sm hover:border-foreground transition-colors"
                 >
                   View All Works
                   <ArrowUpRight className="w-4 h-4" />
-                </a>
+                </Link>
               </div>
             </>
           )}

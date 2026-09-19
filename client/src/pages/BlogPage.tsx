@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { useBlogs } from "@/hooks/use-portfolio";
 import { ExternalLink, Calendar, Tag, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -54,10 +55,10 @@ export default function BlogPage() {
           <h1 className="text-4xl font-bold mb-4">No Blog Posts Yet</h1>
           <p className="text-muted-foreground mb-8">Check back soon for new content!</p>
           <Button asChild variant="outline" className="flex items-center gap-2">
-            <a href="/">
+            <Link href="/">
               <ArrowLeft className="w-4 h-4" />
               Back to Home
-            </a>
+            </Link>
           </Button>
         </div>
       </main>
@@ -77,14 +78,14 @@ export default function BlogPage() {
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6">Blog</h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Sharing insights on AI, Machine Learning, and Technology. 
-              Explore my thoughts on the latest developments and practical applications.
+              Sharing insights on Python backend, API security, and database systems. 
+              Explore my thoughts on FastAPI, high-performance architecture, and software engineering.
             </p>
             <Button asChild variant="outline" className="flex items-center gap-2">
-              <a href="/">
+              <Link href="/">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
-              </a>
+              </Link>
             </Button>
           </motion.div>
         </div>

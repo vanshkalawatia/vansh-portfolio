@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useProjects } from "@/hooks/use-portfolio";
@@ -18,13 +19,13 @@ export default function WorksPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <a
+          <Link
             href="/"
             className="inline-flex items-center gap-2 mono-label text-muted-foreground hover:text-primary transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             BACK TO HOME
-          </a>
+          </Link>
           <h1 className="display-lg">Selected Work</h1>
           <p className="mt-3 text-muted-foreground max-w-[64ch]">
             Every repository, presented as it ships — open any card for the short

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "wouter";
 import { animate, stagger } from "animejs";
 import { motion } from "framer-motion";
 import { useBlogs } from "@/hooks/use-portfolio";
@@ -220,13 +221,13 @@ export function BlogSection() {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <a
-            href="/blog/"
+          <Link
+            href="/blog"
             className="btn-push inline-flex items-center gap-2 px-8 py-3.5 border border-border rounded-full font-semibold text-sm hover:border-foreground transition-colors"
           >
             View All Blog Posts
             <ExternalLink className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
