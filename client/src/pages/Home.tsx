@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { SiGithub, SiLinkedin, SiLeetcode, SiX, SiInstagram } from "react-icons/si";
 import { Navbar } from "@/components/Navbar";
-import { useExperiences, useProjects, useSkills, usePersonalInfo, useEducation, useCertifications, useInterests, useHeroPhrases, useBlogs } from "@/hooks/use-portfolio";
+import { useProjects, useSkills, usePersonalInfo, useEducation, useCertifications, useInterests, useHeroPhrases, useBlogs } from "@/hooks/use-portfolio";
 import { LeetCodeSection } from "@/components/LeetCodeSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SocialLinks } from "@/components/SocialLinks";
@@ -21,7 +21,6 @@ import { DrawnName } from "@/components/DrawnName";
 import { SmoothTicker } from "@/components/SmoothTicker";
 import { StatsStrip } from "@/components/StatsStrip";
 import { Magnetic, Marquee, PulseRing } from "@/components/Interactive";
-import { ExperienceGrouped } from "@/components/ExperienceGrouped";
 import { ProjectCell } from "@/components/ProjectCell";
 import { ProjectModal } from "@/components/ProjectModal";
 import { SkillsMindMap } from "@/components/SkillsMindMap";
@@ -48,7 +47,6 @@ const FETCH_PRIORITY_HIGH: Record<string, string> = { fetchpriority: "high" };
 export default function Home() {
   const { canLoadHeavy } = useConnection();
   const canAnimate = useCanAnimate();
-  const { data: experiences } = useExperiences();
   const { data: projects } = useProjects();
   const { data: skills } = useSkills();
   const { data: personalInfo } = usePersonalInfo();
@@ -65,7 +63,6 @@ export default function Home() {
 
   const yearsBuilding = Math.max(1, new Date().getFullYear() - 2021);
   const techCount = skills?.reduce((acc, g) => acc + g.items.length, 0) ?? 0;
-  const companyCount = new Set(experiences?.map((e) => e.company) ?? []).size;
   const postCount = blogs?.length ?? 0;
 
   return (
@@ -230,12 +227,6 @@ export default function Home() {
           <span id="experience" className="sr-only" />
           <SectionHeading number={1} title="LeetCode & Problem Solving" subtitle="Live problem-solving stats fetched on reload" />
           <LeetCodeSection />
-          {experiences && experiences.length > 0 && (
-            <div className="mt-14">
-              <h4 className="mono-label text-xs uppercase tracking-wider text-muted-foreground mb-6">Academic Journey & Foundations</h4>
-              <ExperienceGrouped experiences={experiences} />
-            </div>
-          )}
         </section>
 
         {/* ============ PROJECTS ============ */}

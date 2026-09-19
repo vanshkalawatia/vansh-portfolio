@@ -93,8 +93,8 @@ export const personalInfo: PersonalInfo = {
   twitter: "https://x.com/vansh0x00",
   instagram: "https://www.instagram.com/vansh0x00/",
   location: "India (UTC+5:30)",
-  avatarUrl: "https://avatars.githubusercontent.com/u/295721289?v=4",
-  resumeUrl: "https://vansh-portfolio-bay.vercel.app/resume.pdf",
+  avatarUrl: "/images/avatar.jpg",
+  resumeUrl: "",
 };
 
 // ------------------------------------------------------------------------
@@ -115,7 +115,7 @@ export const heroPhrases: string[] = [
 export const educationData: EducationItem[] = [
   {
     degree: "Bachelor of Technology in Computer Science & Engineering",
-    institution: "Maharishi Dayanand University (3rd Year, Currently Pursuing)",
+    institution: "Rajasthan Technical University (3rd Year, Currently Pursuing)",
     period: "2024 – Present",
   },
 ];
@@ -127,45 +127,25 @@ export const certificationsData: CertificationItem[] = [
   {
     title: "Foundations of Cryptography",
     issuer: "NPTEL & IIIT Bangalore",
-    year: "2024",
+    year: "2026",
     field: "Cybersecurity & Cryptography",
   },
   {
     title: "Introduction to Database Systems",
     issuer: "NPTEL & IIT Madras",
-    year: "2024",
+    year: "2026",
     field: "Database Architecture & SQL",
   },
   {
     title: "Programming in Java",
     issuer: "NPTEL & IIT Kharagpur",
-    year: "2024",
+    year: "2026",
     field: "OOP & Fundamentals",
   },
 ];
 
 // ------------------------------------------------------------------------
-// 5. ACADEMIC JOURNEY & FOUNDATIONS
-// ------------------------------------------------------------------------
-export const experiencesData: ExperienceItem[] = [
-  {
-    id: 1,
-    title: "B.Tech Computer Science (3rd Year)",
-    company: "Maharishi Dayanand University",
-    period: "2024 – Present",
-    description: [
-      "Currently in Phase 1 — building a rock-solid foundation in core Computer Science and Backend concepts.",
-      "Focused on Python, FastAPI, PostgreSQL, and security fundamentals.",
-      "Solving DSA problems on LeetCode — 19 problems solved (13 Easy, 6 Medium).",
-      "Completed 3 NPTEL certifications: Programming in Java (IIT Kharagpur), Introduction to Database Systems (IIT Madras), Foundations of Cryptography (IIIT Bangalore).",
-      "Building projects: Port Scanner tool, Portfolio website.",
-      "Tech: Python, FastAPI, PostgreSQL, Git, Linux",
-    ],
-  },
-];
-
-// ------------------------------------------------------------------------
-// 6. SELECTED WORK & PROJECTS
+// 5. SELECTED WORK & PROJECTS
 // ------------------------------------------------------------------------
 export const projectsData: ProjectItem[] = [
   {
@@ -196,11 +176,11 @@ export const skillsData: SkillCategory[] = [
     category: "Python & Backend",
     items: [
       "Python 3",
-      "FastAPI",
-      "Flask (basics)",
-      "REST API Design",
-      "Pydantic",
-      "OOP",
+      // "FastAPI",
+      // "Flask (basics)",
+      // "REST API Design",
+      // "Pydantic",
+      // "OOP",
     ],
   },
   {
@@ -209,51 +189,51 @@ export const skillsData: SkillCategory[] = [
     items: [
       "Foundations of Cryptography",
       "Port Scanning",
-      "Secure API Design",
-      "Auth & Authorization",
-      "Input Validation",
+      // "Secure API Design",
+      // "Auth & Authorization",
+      // "Input Validation",
     ],
   },
   {
     id: 3,
     category: "Databases",
     items: [
-      "PostgreSQL",
+      // "PostgreSQL",
       "SQL Fundamentals",
       "Database Design (NPTEL certified)",
-      "SQLAlchemy / ORM basics",
+      // "SQLAlchemy / ORM basics",
     ],
   },
   {
     id: 4,
     category: "DSA & Problem Solving",
     items: [
-      "Arrays & Strings",
-      "Hash Maps & Sets",
-      "Two Pointers",
-      "Sliding Window",
-      "Sorting & Searching",
+      // "Arrays & Strings",
+      // "Hash Maps & Sets",
+      // "Two Pointers",
+      // "Sliding Window",
+      // "Sorting & Searching",
     ],
   },
-  {
-    id: 5,
-    category: "DevOps & Tools",
-    items: [
-      "Git & GitHub",
-      "Linux / CLI",
-      "Docker (learning)",
-      "VS Code",
-      "Postman",
-    ],
-  },
+  // {
+  //   id: 5,
+  //   category: "DevOps & Tools",
+  //   items: [
+  //     // "Git & GitHub",
+  //     // "Linux / CLI",
+  //     // "Docker (learning)",
+  //     // "Zed",
+  //     // "Postman",
+  //   ],
+  // },
   {
     id: 6,
     category: "Web Basics",
     items: [
       "HTML & CSS",
-      "JavaScript",
-      "Astro",
-      "React Basics",
+      // "JavaScript",
+      // "Astro",
+      // "React Basics",
     ],
   },
 ];
@@ -270,7 +250,7 @@ export const blogsData: BlogPostItem[] = [
     thumbnail: "",
     thumbnailWidth: 0,
     thumbnailHeight: 0,
-    externalLink: "https://vansh-portfolio-bay.vercel.app/blog/object-pooling",
+    externalLink: "https://www.linkedin.com/pulse/object-pooling-java-performance-game-changer-vansh-kalawatia-lvktc/",
     platform: "Blog",
     date: "2026-08-09",
     tags: ["Java", "Performance", "Backend", "Object Pooling"],
@@ -283,7 +263,7 @@ export const blogsData: BlogPostItem[] = [
     thumbnail: "",
     thumbnailWidth: 0,
     thumbnailHeight: 0,
-    externalLink: "https://vansh-portfolio-bay.vercel.app/blog/first-post",
+    externalLink: "https://www.linkedin.com/pulse/gos-compiler-broke-my-code-before-i-even-started-heres-kalawatia-nstuc/",
     platform: "Blog",
     date: "2026-06-24",
     tags: ["Go", "Beginners", "Package Structure", "Learning"],
