@@ -25,6 +25,7 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "client", "src"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@config": path.resolve(import.meta.dirname, "PORTFOLIO_CONFIG.ts"),
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
@@ -55,6 +56,7 @@ export default defineConfig({
   },
   server: {
     fs: {
+      allow: [path.resolve(import.meta.dirname)],
       strict: true,
       deny: ["**/.*"],
     },
