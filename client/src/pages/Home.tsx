@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { SiGithub, SiLinkedin, SiLeetcode, SiX, SiInstagram } from "react-icons/si";
 import { Navbar } from "@/components/Navbar";
-import { useProjects, useSkills, usePersonalInfo, useEducation, useCertifications, useInterests, useHeroPhrases, useBlogs } from "@/hooks/use-portfolio";
+import { useExperiences, useProjects, useSkills, usePersonalInfo, useEducation, useCertifications, useInterests, useHeroPhrases, useBlogs } from "@/hooks/use-portfolio";
 import { LeetCodeSection } from "@/components/LeetCodeSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SocialLinks } from "@/components/SocialLinks";
@@ -21,6 +21,7 @@ import { DrawnName } from "@/components/DrawnName";
 import { SmoothTicker } from "@/components/SmoothTicker";
 import { StatsStrip } from "@/components/StatsStrip";
 import { Magnetic, Marquee, PulseRing } from "@/components/Interactive";
+import { ExperienceGrouped } from "@/components/ExperienceGrouped";
 import { ProjectCell } from "@/components/ProjectCell";
 import { ProjectModal } from "@/components/ProjectModal";
 import { SkillsMindMap } from "@/components/SkillsMindMap";
@@ -43,6 +44,7 @@ const FETCH_PRIORITY_HIGH: Record<string, string> = { fetchpriority: "high" };
 export default function Home() {
   const { canLoadHeavy } = useConnection();
   const canAnimate = useCanAnimate();
+  const { data: experiences } = useExperiences();
   const { data: projects } = useProjects();
   const { data: skills } = useSkills();
   const { data: personalInfo } = usePersonalInfo();
@@ -222,11 +224,18 @@ export default function Home() {
           ]}
         />
 
-        {/* ============ LEETCODE & PROBLEM SOLVING ============ */}
+        {/* ============ 00: LEETCODE & PROBLEM SOLVING ============ */}
         <section id="leetcode" className="rule-t py-20 md:py-28 cv-auto">
-          <span id="experience" className="sr-only" />
-          <SectionHeading number={1} title="LeetCode & Problem Solving" subtitle="Live problem-solving stats fetched on reload" />
+          <SectionHeading number={0} title="LeetCode & Problem Solving" subtitle="Live problem-solving stats fetched on reload" />
           <LeetCodeSection />
+        </section>
+
+        {/* ============ 01: EXPERIENCE ============ */}
+        <section id="experience" className="rule-t py-20 md:py-28 cv-auto">
+          <SectionHeading number={1} title="Experience" subtitle="Engineering journey, projects & open-source work" />
+          {experiences && experiences.length > 0 && (
+            <ExperienceGrouped experiences={experiences} />
+          )}
         </section>
 
         {/* ============ PROJECTS ============ */}
@@ -279,57 +288,65 @@ export default function Home() {
           )}
         </section>
 
-        {/* ============ BLOG ============ */}
-        <BlogSection />
-
-        {/* ============ EDUCATION + CERTIFICATIONS ============ */}
+        {/* ============ 04: BACKGROUND (EDUCATION + CERTIFICATIONS) ============ */}
         <section id="education" className="rule-t py-20 md:py-28 cv-auto">
-          <SectionHeading title="Background" subtitle="Education and verified certifications" />
-          <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+          <SectionHeading number={4} title="Background" subtitle="Education and verified certifications" />
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             <div>
               <h3 className="text-xl font-extrabold tracking-tight mb-6" style={{ fontStretch: "108%" }}>Education</h3>
-              {education?.map((edu, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.45, delay: idx * 0.06 }}
-                  className={`rule-t py-4 flex items-start gap-3.5 ${idx === 0 ? "border-t-0 pt-0" : ""}`}
-                >
-                  <GraduationCap className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <div className="font-bold text-[15px] leading-snug">{edu.degree}</div>
-                    <div className="text-sm text-muted-foreground mt-1">{edu.institution}</div>
-                    <div className="mono-label text-accent mt-1.5">{edu.period.toUpperCase()}</div>
-                  </div>
-                </motion.div>
-              ))}
+              <div className="space-y-4">
+                {education?.map((edu, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.45, delay: idx * 0.06 }}
+                    className="border border-border/80 bg-card/60 hover:border-primary/50 transition-colors p-5 rounded-2xl flex items-center gap-4"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                      <GraduationCap className="w-5 h-5 text-accent" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-[15px] leading-snug">{edu.degree}</div>
+                      <div className="text-sm text-muted-foreground mt-1">{edu.institution}</div>
+                      <div className="mono-label text-xs text-accent mt-1.5">{edu.period.toUpperCase()}</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
             <div>
               <h3 className="text-xl font-extrabold tracking-tight mb-6" style={{ fontStretch: "108%" }}>Certifications (NPTEL)</h3>
-              {certifications?.map((cert, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.45, delay: idx * 0.06 }}
-                  className={`rule-t py-4 flex items-start gap-3.5 ${idx === 0 ? "border-t-0 pt-0" : ""}`}
-                >
-                  <Award className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <div className="font-bold text-[15px] leading-snug">{cert.title}</div>
-                    <div className="text-sm text-muted-foreground mt-1">
-                      {cert.issuer} &middot; {cert.field}
+              <div className="space-y-4">
+                {certifications?.map((cert, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.45, delay: idx * 0.06 }}
+                    className="border border-border/80 bg-card/60 hover:border-primary/50 transition-colors p-5 rounded-2xl flex items-center gap-4"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                      <Award className="w-5 h-5 text-accent" aria-hidden="true" />
                     </div>
-                    <div className="mono-label text-accent mt-1.5">{cert.year} &middot; VERIFIED</div>
-                  </div>
-                </motion.div>
-              ))}
+                    <div>
+                      <div className="font-bold text-[15px] leading-snug">{cert.title}</div>
+                      <div className="text-sm text-muted-foreground mt-1">
+                        {cert.issuer} &middot; {cert.field}
+                      </div>
+                      <div className="mono-label text-xs text-accent mt-1.5">{cert.year} &middot; VERIFIED</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
+
+        {/* ============ 05: WRITING (BLOG) ============ */}
+        <BlogSection />
 
         {/* ============ BEYOND CODE ============ */}
         <section id="personal" className="rule-t py-20 md:py-28 cv-auto">

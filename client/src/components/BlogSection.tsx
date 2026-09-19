@@ -102,7 +102,7 @@ export function BlogSection() {
   return (
     <section id="blog" className="rule-t py-20 md:py-28 cv-auto">
       <div className="max-w-6xl mx-auto px-5 md:px-8">
-        <SectionHeading title="Writing" subtitle="Thoughts on AI, Machine Learning, and Technology" />
+        <SectionHeading number={5} title="Writing" subtitle="Thoughts on backend architecture, API security, and software engineering" />
 
         <div className="flex items-center justify-between gap-3 mb-6">
           <span className="mono-label text-muted-foreground" aria-live="polite">

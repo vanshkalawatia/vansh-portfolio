@@ -145,7 +145,26 @@ export const certificationsData: CertificationItem[] = [
 ];
 
 // ------------------------------------------------------------------------
-// 5. SELECTED WORK & PROJECTS
+// 5. WORK EXPERIENCE & JOURNEY
+// ------------------------------------------------------------------------
+export const experiencesData: ExperienceItem[] = [
+  {
+    id: 1,
+    title: "Backend Developer & Student Engineer",
+    company: "Open Source & Personal Projects",
+    period: "2024 – Present",
+    description: [
+      "Building secure, scalable RESTful APIs with Python, FastAPI, and PostgreSQL.",
+      "Developing network security tooling including custom socket-based port scanners.",
+      "Practicing problem-solving & data structures regularly on LeetCode with Python 3.",
+      "Completed verified NPTEL certifications in Java, Database Systems, and Cryptography.",
+      "Tech: Python, FastAPI, PostgreSQL, Git, Linux, Sockets",
+    ],
+  },
+];
+
+// ------------------------------------------------------------------------
+// 6. SELECTED WORK & PROJECTS
 // ------------------------------------------------------------------------
 export const projectsData: ProjectItem[] = [
   {

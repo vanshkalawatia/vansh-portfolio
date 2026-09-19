@@ -7,6 +7,7 @@ import {
   heroPhrases,
   educationData,
   certificationsData,
+  experiencesData,
   projectsData,
   skillsData,
   blogsData,
@@ -25,7 +26,7 @@ export const researchData: { title: string; authors: string; venue: string; year
 
 export const portfolioData = {
   personalInfo,
-  experiences: [],
+  experiences: experiencesData,
   projects: projectsData,
   skills: skillsData,
   blogs: blogsData,

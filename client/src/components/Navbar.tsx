@@ -7,6 +7,7 @@ import { scrollToSection, activeSection } from "@/lib/scroll-to";
 
 const navItems = [
   { name: "LeetCode", to: "leetcode" },
+  { name: "Experience", to: "experience" },
   { name: "Projects", to: "projects" },
   { name: "Skills", to: "skills" },
   { name: "Education", to: "education" },
@@ -100,7 +101,7 @@ export function Navbar() {
         </a>
 
         {/* Floating pill nav (desktop) */}
-        <div className="hidden lg:flex items-center gap-1 border border-border bg-card/60 backdrop-blur-sm rounded-full px-2 py-1.5">
+        <div className="hidden lg:flex items-center gap-0.5 border border-border bg-card/70 backdrop-blur-md rounded-full px-1.5 py-1 shadow-sm">
           {navItems.map((item) => {
             const isActive = active === item.to;
             return (
