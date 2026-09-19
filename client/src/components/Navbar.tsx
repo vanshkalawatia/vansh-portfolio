@@ -6,9 +6,10 @@ import { ThemeControls } from "@/components/ThemeProvider";
 import { scrollToSection, activeSection } from "@/lib/scroll-to";
 
 const navItems = [
-  { name: "Experience", to: "experience" },
+  { name: "LeetCode", to: "leetcode" },
   { name: "Projects", to: "projects" },
   { name: "Skills", to: "skills" },
+  { name: "Education", to: "education" },
   { name: "Writing", to: "blog" },
   { name: "Contact", to: "contact" },
 ];

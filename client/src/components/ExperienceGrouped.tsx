@@ -101,6 +101,8 @@ export function ExperienceGrouped({ experiences }: ExperienceGroupedProps) {
         }
         return groups.map((group) => {
           const span = `${periodStart(group.roles[group.roles.length - 1].period)} – ${periodEnd(group.roles[0].period)}`;
+          const isAcademic = /university|college|school|institute|academy|student/i.test(group.company);
+          const typeLabel = isAcademic ? "ACADEMIC INSTITUTION" : "ORGANIZATION";
           return (
             <article key={group.company} className="relative rule-t py-10 md:py-12 overflow-hidden">
               {/* Giant outlined company name drifting behind the masthead */}
@@ -115,7 +117,7 @@ export function ExperienceGrouped({ experiences }: ExperienceGroupedProps) {
               {/* Company masthead - high contrast, accent identity */}
               <div className="relative flex flex-wrap items-center justify-between gap-3 mb-9">
                 <div>
-                  <p className="mono-label text-muted-foreground mb-1.5">COMPANY</p>
+                  <p className="mono-label text-muted-foreground mb-1.5">{typeLabel}</p>
                   <h3
                     className="text-3xl md:text-[2.6rem] font-extrabold tracking-tight text-accent leading-none"
                     style={{ fontStretch: "110%" }}

@@ -226,12 +226,13 @@ export default function Home() {
         />
 
         {/* ============ LEETCODE & PROBLEM SOLVING ============ */}
-        <section id="experience" className="rule-t py-20 md:py-28 cv-auto">
-          <SectionHeading title="LeetCode & Problem Solving" subtitle="Live problem-solving stats fetched on reload" />
+        <section id="leetcode" className="rule-t py-20 md:py-28 cv-auto">
+          <span id="experience" className="sr-only" />
+          <SectionHeading number={1} title="LeetCode & Problem Solving" subtitle="Live problem-solving stats fetched on reload" />
           <LeetCodeSection />
           {experiences && experiences.length > 0 && (
             <div className="mt-14">
-              <h4 className="mono-label text-xs uppercase tracking-wider text-muted-foreground mb-6">Student Journey & Foundation</h4>
+              <h4 className="mono-label text-xs uppercase tracking-wider text-muted-foreground mb-6">Academic Journey & Foundations</h4>
               <ExperienceGrouped experiences={experiences} />
             </div>
           )}

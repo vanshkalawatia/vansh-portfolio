@@ -65,8 +65,8 @@ export const portfolioData = {
   experiences: [
     {
       id: 1,
-      title: "3rd Year CS Student",
-      company: "University",
+      title: "B.Tech Computer Science (3rd Year)",
+      company: "Maharishi Dayanand University",
       period: "2024 – Present",
       description: [
         "Currently in Phase 1 — building a rock-solid foundation in core Computer Science and Backend concepts.",

@@ -12,17 +12,23 @@ interface SectionHeadingProps {
 // Fixed numbering per section keeps order stable across renders/pages.
 // Keys are the lowercased, space-dashed section titles used in Home.
 const sectionNumbers: Record<string, number> = {
+  leetcode: 1,
+  "leetcode-&-problem-solving": 1,
+  "problem-solving": 1,
   experience: 1,
   "selected-work": 2,
+  projects: 2,
   capabilities: 3,
   skills: 3,
   writing: 4,
   blog: 4,
   background: 5,
+  education: 5,
   "beyond-code": 6,
   "fun-&-games": 7,
   "fun-games": 7,
   "get-in-touch": 8,
+  contact: 8,
 };
 
 /** Hand-drawn accent stroke that sketches itself under the title on scroll. */
@@ -104,7 +110,7 @@ function GhostNumber({ label }: { label: string }) {
 
 export function SectionHeading({ title, subtitle, number }: SectionHeadingProps) {
   const sectionKey = title.toLowerCase().replace(/\s+/g, "-");
-  const displayNumber = number !== undefined ? number : sectionNumbers[sectionKey] ?? 0;
+  const displayNumber = number !== undefined ? number : (sectionNumbers[sectionKey] ?? 1);
   const formattedNumber = String(displayNumber).padStart(2, "0");
 
   return (
