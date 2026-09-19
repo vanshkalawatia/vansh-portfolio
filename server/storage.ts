@@ -11,18 +11,20 @@ import { eq } from "drizzle-orm";
 // Mock data for development without database
 const MOCK_PERSONAL_INFO: any = {
   id: 1,
-  name: "Mehedi Hasan",
-  role: "AI/ML Engineer",
-  bio: "AI/ML Engineer with expertise in document understanding, deep learning, and LLM applications. Experienced in building production-grade systems for text recognition, data extraction, and intelligent search.",
-  email: "abir.aust.102@gmail.com",
-  phone: "(+880) 1521323549",
-  github: "https://github.com/Mehedi-Hasan-Abir",
-  linkedin: "https://linkedin.com/in/mehedihasan102",
-  location: "Dhaka, Bangladesh",
-  avatarUrl: "https://avatars.githubusercontent.com/u/76932315?v=4",
-  resumeUrl: "https://drive.google.com/file/d/14TMLD1N1dBliUo_6KvHrrSxjoAnI9bW1/view?usp=sharing",
-  facebook: "https://www.facebook.com/mehedihasan.abir.7/",
-  instagram: "https://www.instagram.com/___abracadabra_____/"
+  name: "Vansh Kalawatia",
+  role: "Backend Developer",
+  bio: "Python backend developer in progress. Building secure APIs with FastAPI and PostgreSQL. One commit at a time.",
+  email: "vanshkalawatia2@gmail.com",
+  phone: "",
+  github: "https://github.com/vanshkalawatia",
+  linkedin: "https://linkedin.com/in/vanshkalawatia",
+  location: "India",
+  avatarUrl: "https://avatars.githubusercontent.com/u/295721289?v=4",
+  resumeUrl: "https://vansh-portfolio-bay.vercel.app/resume.pdf",
+  facebook: "",
+  instagram: "https://www.instagram.com/vansh0x00/",
+  twitter: "https://x.com/vansh0x00",
+  leetcode: "https://leetcode.com/u/vanshkalawatia/",
 };
 
 const MOCK_BLOGS: any[] = [

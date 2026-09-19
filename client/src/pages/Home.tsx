@@ -6,11 +6,12 @@ import {
   ArrowUpRight,
   Download,
   GraduationCap,
-  FlaskConical,
+  Award,
 } from "lucide-react";
-import { SiGithub, SiLinkedin, SiMedium } from "react-icons/si";
+import { SiGithub, SiLinkedin, SiLeetcode, SiX, SiInstagram } from "react-icons/si";
 import { Navbar } from "@/components/Navbar";
-import { useExperiences, useProjects, useSkills, usePersonalInfo, useEducation, useResearch, useInterests, useHeroPhrases, useBlogs } from "@/hooks/use-portfolio";
+import { useExperiences, useProjects, useSkills, usePersonalInfo, useEducation, useCertifications, useInterests, useHeroPhrases, useBlogs } from "@/hooks/use-portfolio";
+import { LeetCodeSection } from "@/components/LeetCodeSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SocialLinks } from "@/components/SocialLinks";
 import { useConnection } from "@/contexts/ConnectionContext";
@@ -51,7 +52,7 @@ export default function Home() {
   const { data: skills } = useSkills();
   const { data: personalInfo } = usePersonalInfo();
   const { data: education } = useEducation();
-  const { data: research } = useResearch();
+  const { data: certifications } = useCertifications();
   const { data: interests } = useInterests();
   const { data: blogs } = useBlogs();
   const heroPhrases = useHeroPhrases();
@@ -81,7 +82,7 @@ export default function Home() {
             >
               <p className="inline-flex items-center gap-2.5 mono-label !text-[13px] md:!text-sm font-semibold text-accent border border-primary/50 bg-primary/10 rounded-full px-5 py-2.5 mb-6 tracking-wide">
                 <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
-                AI/ML ENGINEER &middot; DHAKA, BANGLADESH
+                BACKEND DEVELOPER &middot; INDIA
               </p>
               <div className="flex items-center gap-3 sm:gap-6">
                 <DrawnName />
@@ -134,7 +135,9 @@ export default function Home() {
                 {[
                   { href: personalInfo.github, label: "GitHub", Icon: SiGithub },
                   { href: personalInfo.linkedin, label: "LinkedIn", Icon: SiLinkedin },
-                  { href: personalInfo.medium, label: "Medium", Icon: SiMedium },
+                  { href: "https://leetcode.com/u/vanshkalawatia/", label: "LeetCode", Icon: SiLeetcode },
+                  { href: personalInfo.twitter, label: "X (Twitter)", Icon: SiX },
+                  { href: personalInfo.instagram, label: "Instagram", Icon: SiInstagram },
                 ].map(({ href, label, Icon }) => (
                   <a
                     key={label}
@@ -189,8 +192,8 @@ export default function Home() {
                 />
               </div>
               <figcaption className="mono-label text-muted-foreground mt-4 flex justify-between">
-                <span>DHAKA &middot; UTC+6</span>
-                <span>EST. 2021</span>
+                <span>INDIA &middot; UTC+5:30</span>
+                <span>STUDENT &middot; 3RD YEAR</span>
               </figcaption>
             </motion.figure>
           </div>
@@ -214,18 +217,22 @@ export default function Home() {
         {/* ============ STATS ============ */}
         <StatsStrip
           stats={[
-            { value: yearsBuilding, suffix: "+", label: "Years building AI" },
-            { value: techCount, label: "Production technologies" },
-            { value: companyCount, label: "Companies" },
-            { value: postCount, label: "Published essays" },
+            { value: 19, suffix: "+", label: "LeetCode Solved" },
+            { value: techCount, label: "Technologies & Tools" },
+            { value: 3, label: "NPTEL Certifications" },
+            { value: postCount, label: "Published Articles" },
           ]}
         />
 
-        {/* ============ EXPERIENCE ============ */}
+        {/* ============ LEETCODE & PROBLEM SOLVING ============ */}
         <section id="experience" className="rule-t py-20 md:py-28 cv-auto">
-          <SectionHeading title="Experience" subtitle="My professional journey" />
+          <SectionHeading title="LeetCode & Problem Solving" subtitle="Live problem-solving stats fetched on reload" />
+          <LeetCodeSection />
           {experiences && experiences.length > 0 && (
-            <ExperienceGrouped experiences={experiences} />
+            <div className="mt-14">
+              <h4 className="mono-label text-xs uppercase tracking-wider text-muted-foreground mb-6">Student Journey & Foundation</h4>
+              <ExperienceGrouped experiences={experiences} />
+            </div>
           )}
         </section>
 
@@ -269,7 +276,7 @@ export default function Home() {
         <section id="skills" className="rule-t py-20 md:py-28 cv-auto">
           <SectionHeading
             title="Capabilities"
-            subtitle="The production stack behind seven years of shipped AI systems"
+            subtitle="Core technologies and security-first backend engineering foundation"
           />
           {skills && skills.length > 0 && (
             <>
@@ -282,9 +289,9 @@ export default function Home() {
         {/* ============ BLOG ============ */}
         <BlogSection />
 
-        {/* ============ EDUCATION + RESEARCH ============ */}
+        {/* ============ EDUCATION + CERTIFICATIONS ============ */}
         <section id="education" className="rule-t py-20 md:py-28 cv-auto">
-          <SectionHeading title="Background" subtitle="Education and academic work" />
+          <SectionHeading title="Background" subtitle="Education and verified certifications" />
           <div className="grid md:grid-cols-2 gap-10 md:gap-16">
             <div>
               <h3 className="text-xl font-extrabold tracking-tight mb-6" style={{ fontStretch: "108%" }}>Education</h3>
@@ -307,8 +314,8 @@ export default function Home() {
               ))}
             </div>
             <div>
-              <h3 className="text-xl font-extrabold tracking-tight mb-6" style={{ fontStretch: "108%" }}>Research</h3>
-              {research?.map((res, idx) => (
+              <h3 className="text-xl font-extrabold tracking-tight mb-6" style={{ fontStretch: "108%" }}>Certifications (NPTEL)</h3>
+              {certifications?.map((cert, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 16 }}
@@ -317,20 +324,13 @@ export default function Home() {
                   transition={{ duration: 0.45, delay: idx * 0.06 }}
                   className={`rule-t py-4 flex items-start gap-3.5 ${idx === 0 ? "border-t-0 pt-0" : ""}`}
                 >
-                  <FlaskConical className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
+                  <Award className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <div className="font-bold text-[15px] leading-snug">{res.title}</div>
+                    <div className="font-bold text-[15px] leading-snug">{cert.title}</div>
                     <div className="text-sm text-muted-foreground mt-1">
-                      {res.authors} &middot; {res.venue} &middot; {res.year}
+                      {cert.issuer} &middot; {cert.field}
                     </div>
-                    <a
-                      href={res.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-accent text-[13px] font-semibold mt-2 hover:underline underline-offset-4"
-                    >
-                      View <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
+                    <div className="mono-label text-accent mt-1.5">{cert.year} &middot; VERIFIED</div>
                   </div>
                 </motion.div>
               ))}
@@ -358,7 +358,8 @@ export default function Home() {
                 github: personalInfo.github || "",
                 linkedin: personalInfo.linkedin || "",
                 email: personalInfo.email || "",
-                facebook: personalInfo.facebook || "",
+                leetcode: personalInfo.leetcode || "",
+                twitter: personalInfo.twitter || "",
                 instagram: personalInfo.instagram || "",
               }}
             />
@@ -410,7 +411,8 @@ export default function Home() {
                   github: personalInfo.github || "",
                   linkedin: personalInfo.linkedin || "",
                   email: personalInfo.email || "",
-                  facebook: personalInfo.facebook || "",
+                  leetcode: personalInfo.leetcode || "",
+                  twitter: personalInfo.twitter || "",
                   instagram: personalInfo.instagram || "",
                 }}
               />

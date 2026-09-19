@@ -19,13 +19,12 @@ interface CapItem {
 
 /** One circuit icon per Capabilities group, in SkillsMindMap category order. */
 const ITEMS: CapItem[] = [
-  { key: "comp", label: "Programming", Icon: ComputerIcon },
-  { key: "chip", label: "ML & Deep Learning", Icon: ChipBrainIcon },
-  { key: "sci", label: "LLMs & Agentic AI", Icon: ScienceAiIcon },
-  { key: "net", label: "Vector & Search", Icon: ChartNetworkIcon },
-  { key: "big", label: "Backend & Distributed Systems", Icon: BigDataIcon },
-  { key: "usr", label: "Business Analytics", Icon: ChartUserIcon },
-  { key: "admin", label: "DevOps & Cloud", Icon: AdminAltIcon },
+  { key: "comp", label: "Python & Backend", Icon: ComputerIcon },
+  { key: "admin", label: "Security & Crypto", Icon: AdminAltIcon },
+  { key: "big", label: "FastAPI & REST", Icon: BigDataIcon },
+  { key: "net", label: "PostgreSQL & SQL", Icon: ChartNetworkIcon },
+  { key: "chip", label: "DSA & LeetCode", Icon: ChipBrainIcon },
+  { key: "usr", label: "DevOps & CLI", Icon: ChartUserIcon },
 ];
 
 /** Cursor-tracked spotlight position (ProjectCard pattern, no re-render). */
@@ -49,7 +48,7 @@ export function CapabilityIcons() {
     <div
       ref={ref}
       className={
-        "grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-10 " +
+        "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-10 " +
         (canAnimate && !inView ? "circuit-paused" : "")
       }
       role="list"

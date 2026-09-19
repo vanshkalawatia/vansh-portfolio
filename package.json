@@ -1,9 +1,9 @@
 {
-  "name": "modern-portfolio",
+  "name": "vansh-portfolio",
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://Mehedi-Hasan-Abir.github.io",
+  "homepage": "https://vanshkalawatia.github.io",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
     "build": "tsx script/build.ts",

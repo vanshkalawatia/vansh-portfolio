@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { SiGithub, SiLinkedin, SiMedium } from "react-icons/si";
+import { SiGithub, SiLinkedin, SiLeetcode } from "react-icons/si";
 import { ThemeControls } from "@/components/ThemeProvider";
 import { scrollToSection, activeSection } from "@/lib/scroll-to";
 
@@ -16,9 +16,9 @@ const navItems = [
 const navIds = navItems.map((item) => item.to);
 
 const socialLinks = [
-  { href: "https://github.com/Mehedi-Hasan-Abir", label: "GitHub", Icon: SiGithub },
-  { href: "https://linkedin.com/in/mehedihasan102", label: "LinkedIn", Icon: SiLinkedin },
-  { href: "https://medium.com/@mhabir102", label: "Medium", Icon: SiMedium },
+  { href: "https://github.com/vanshkalawatia", label: "GitHub", Icon: SiGithub },
+  { href: "https://linkedin.com/in/vanshkalawatia", label: "LinkedIn", Icon: SiLinkedin },
+  { href: "https://leetcode.com/u/vanshkalawatia/", label: "LeetCode", Icon: SiLeetcode },
 ];
 
 export function Navbar() {
@@ -94,7 +94,7 @@ export function Navbar() {
         >
           <span className="w-2.5 h-2.5 bg-primary rotate-45 transition-transform duration-300 group-hover:rotate-[135deg]" aria-hidden="true" />
           <span className="font-extrabold tracking-tight text-lg" style={{ fontStretch: "110%" }}>
-            Mehedi<span className="text-accent"> / </span>Hasan
+            Vansh<span className="text-accent"> / </span>Kalawatia
           </span>
         </a>
 
@@ -139,7 +139,7 @@ export function Navbar() {
         {/* Right cluster */}
         <div className="flex items-center gap-1.5">
           <a
-            href="mailto:abir.aust.102@gmail.com"
+            href="mailto:vanshkalawatia2@gmail.com"
             className="hidden xl:inline-flex items-center gap-2 mono-label !text-[11px] text-accent border border-primary/40 bg-primary/10 rounded-full px-3.5 py-1.5"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />

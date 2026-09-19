@@ -146,16 +146,16 @@ async function seedDatabase() {
     console.log("Seeding database...");
 
     await storage.createPersonalInfo({
-      name: "Mehedi Hasan",
-      role: "AI/ML Engineer",
-      bio: "Passionate AI Engineer specializing in LLMs, OCR, and Document Understanding. Experienced in building high-throughput inference pipelines and scalable ML systems.",
-      email: "abir.aust.102@gmail.com",
-      phone: "(+880) 1521323549",
-      github: "https://github.com/Mehedi-Hasan-Abir",
-      linkedin: "https://linkedin.com/in/mehedihasan102",
-      location: "Dhaka, Bangladesh",
-      avatarUrl: "/images/profile.jpg",
-      resumeUrl: "/images/resume.pdf"
+      name: "Vansh Kalawatia",
+      role: "Backend Developer",
+      bio: "Python backend developer in progress. Building secure APIs with FastAPI and PostgreSQL. One commit at a time.",
+      email: "vanshkalawatia2@gmail.com",
+      phone: "",
+      github: "https://github.com/vanshkalawatia",
+      linkedin: "https://linkedin.com/in/vanshkalawatia",
+      location: "India",
+      avatarUrl: "https://avatars.githubusercontent.com/u/295721289?v=4",
+      resumeUrl: "https://vansh-portfolio-bay.vercel.app/resume.pdf"
     });
 
     const expData = [

@@ -6,12 +6,12 @@ import { execFileSync } from "child_process";
 
 const GA_ID_PATTERN = /^G-[A-Z0-9]+$/;
 const clientOutputDirectory = path.resolve("dist/public");
-const BLOG_TITLE = "AI/ML Engineering Blog — Mehedi Hasan";
-const BLOG_DESCRIPTION = "Insights on AI, machine learning, LLM systems, and practical production engineering from Mehedi Hasan.";
-const BLOG_URL = "https://mehedi-hasan-abir.github.io/blog/";
-const WORKS_TITLE = "Selected Work — Mehedi Hasan";
-const WORKS_DESCRIPTION = "Open-source AI/ML projects by Mehedi Hasan: LLM systems, RAG agents, search infrastructure, and applied deep learning.";
-const WORKS_URL = "https://mehedi-hasan-abir.github.io/works/";
+const BLOG_TITLE = "Engineering Blog — Vansh Kalawatia";
+const BLOG_DESCRIPTION = "Insights on Python backend, API security, and software engineering from Vansh Kalawatia.";
+const BLOG_URL = "https://vanshkalawatia.github.io/blog/";
+const WORKS_TITLE = "Selected Work — Vansh Kalawatia";
+const WORKS_DESCRIPTION = "Backend projects by Vansh Kalawatia: FastAPI APIs, security tools, and database architecture.";
+const WORKS_URL = "https://vanshkalawatia.github.io/works/";
 
 function replaceRequired(html: string, pattern: RegExp, replacement: string, label: string) {
   if (!pattern.test(html)) {

@@ -132,15 +132,15 @@ function SkillsTreeMobile({ skills }: { skills: SkillGroup[] }) {
 
 
   return (
-    <div ref={ref} className="relative pl-6" role="img" aria-label="Capabilities grouped into seven areas">
+    <div ref={ref} className="relative pl-6" role="img" aria-label="Capabilities grouped into skill areas">
       <span
         data-rail
         aria-hidden="true"
         className="absolute left-[5px] top-2 bottom-6 w-px bg-border origin-top"
       />
       <div ref={rootRef} className="inline-flex flex-col items-center border-2 border-primary bg-card rounded-2xl px-6 py-3.5 mb-7">
-        <span className="font-extrabold tracking-wide text-[15px]">AI ENGINEERING</span>
-        <span className="mono-label text-[10px] text-muted-foreground mt-0.5">PRODUCTION STACK</span>
+        <span className="font-extrabold tracking-wide text-[15px]">BACKEND DEVELOPMENT</span>
+        <span className="mono-label text-[10px] text-muted-foreground mt-0.5">CORE CAPABILITIES</span>
       </div>
 
       <div className="space-y-7">
@@ -317,7 +317,7 @@ function SkillsMapDesktop({ skills }: { skills: SkillGroup[] }) {
             fontWeight={800}
             letterSpacing="0.5"
           >
-            AI ENGINEERING
+            BACKEND DEV
           </text>
           <text
             x={ROOT.x + ROOT.w / 2}
@@ -328,7 +328,7 @@ function SkillsMapDesktop({ skills }: { skills: SkillGroup[] }) {
             fontFamily="var(--font-mono)"
             letterSpacing="1"
           >
-            PRODUCTION STACK
+            CORE CAPABILITIES
           </text>
         </g>
 

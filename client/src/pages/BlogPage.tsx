@@ -215,15 +215,15 @@ export default function BlogPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a 
-                href="https://medium.com/@mhabir102" 
+                href="https://github.com/vanshkalawatia" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
               >
-                Follow on Medium
+                Follow on GitHub
               </a>
               <a 
-                href="https://linkedin.com/in/mehedihasan102" 
+                href="https://linkedin.com/in/vanshkalawatia" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -231,12 +231,12 @@ export default function BlogPage() {
                 Connect on LinkedIn
               </a>
               <a 
-                href="https://mhabir.substack.com" 
+                href="https://x.com/vansh0x00" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
               >
-                Subscribe on Substack
+                Follow on X
               </a>
             </div>
           </motion.div>
