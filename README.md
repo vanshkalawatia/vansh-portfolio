@@ -107,7 +107,7 @@ npm run start
 # Server runs on http://localhost:5000
 ```
 
-## 🔧 Configuration
+## 🔧 Configuration 
 
 ### Environment Variables
 
