@@ -115,7 +115,6 @@
     "@types/testing-library__jest-dom": "^5.14.9",
     "@types/ws": "^8.5.13",
     "@vitejs/plugin-react": "^4.7.0",
-    "artillery": "^2.0.29",
     "autoprefixer": "^10.4.20",
     "cross-env": "^10.1.0",
     "drizzle-kit": "^0.31.8",
