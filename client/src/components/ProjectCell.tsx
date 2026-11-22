@@ -15,11 +15,11 @@ const isHoverless = () =>
   typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
 
 interface ProjectCellProps {
-  project: Project;
+  project: any;
   index: number;
   className?: string;
   lead?: boolean;
-  onDetails: (project: Project) => void;
+  onDetails: (project: any) => void;
 }
 
 export function ProjectCell({
@@ -114,7 +114,7 @@ export function ProjectCell({
         {project.description}
       </p>
       <div ref={chipsRef} className="flex flex-wrap gap-1.5 mt-5">
-        {project.techStack.map((tech) => (
+        {project.techStack.map((tech: string) => (
           <span
             key={tech}
             data-chip
@@ -134,14 +134,29 @@ export function ProjectCell({
           <LayoutGrid className="w-4 h-4" />
           Details
         </button>
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-push inline-flex items-center gap-1.5 px-4 py-2 border border-primary/30 bg-primary/10 text-primary rounded-full font-semibold text-sm hover:bg-primary/20 transition-colors"
+          >
+            Live Demo <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        )}
         {project.link && (
           <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:text-accent transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-accent transition-colors"
           >
             GitHub <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            {typeof project.stars === 'number' && project.stars > 0 && (
+              <span className="text-xs px-2 py-0.5 rounded-full bg-secondary border border-border text-foreground font-mono">
+                ★ {project.stars}
+              </span>
+            )}
           </a>
         )}
       </div>

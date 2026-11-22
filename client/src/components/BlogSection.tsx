@@ -141,7 +141,7 @@ export function BlogSection() {
           aria-label="Featured posts"
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-5 px-5 md:mx-0 md:px-0"
         >
-          {featuredBlogs.map((blog: BlogPost, index: number) => (
+          {featuredBlogs.map((blog: any, index: number) => (
             <motion.article
               key={blog.id}
               data-card

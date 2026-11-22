@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
 import type { Project } from "@shared/schema";
 
 interface ProjectModalProps {
-  projects: Project[];
+  projects: any[];
   startIndex: number;
   onClose: () => void;
 }
@@ -93,7 +93,7 @@ export function ProjectModal({ projects, startIndex, onClose }: ProjectModalProp
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-1.5 mt-5">
-                {project.techStack.map((tech) => (
+                {project.techStack.map((tech: string) => (
                   <span key={tech} className="tech-chip">
                     {tech}
                   </span>
@@ -125,16 +125,33 @@ export function ProjectModal({ projects, startIndex, onClose }: ProjectModalProp
               {index + 1} / {projects.length}
             </span>
           </div>
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:underline underline-offset-4"
-            >
-              View on GitHub <ArrowUpRight className="w-4 h-4" />
-            </a>
-          )}
+          <div className="flex items-center gap-3">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:underline underline-offset-4"
+              >
+                Live Demo <ArrowUpRight className="w-4 h-4" />
+              </a>
+            )}
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-accent text-sm font-semibold hover:underline underline-offset-4"
+              >
+                View on GitHub <ArrowUpRight className="w-4 h-4" />
+                {typeof project.stars === 'number' && project.stars > 0 && (
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-secondary text-foreground font-mono">
+                    ★ {project.stars}
+                  </span>
+                )}
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>

@@ -1,0 +1,8 @@
+allowBuilds:
+  '@parcel/watcher': true
+  '@playwright/browser-chromium': true
+  '@scarf/scarf': true
+  bufferutil: true
+  esbuild: true
+  protobufjs: true
+  unix-dgram: true

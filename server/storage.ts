@@ -6,257 +6,26 @@ import {
   experiences, projects, skills, personalInfo 
 } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
-
-// Mock data for development without database
-const MOCK_PERSONAL_INFO: any = {
-  id: 1,
-  name: "Vansh Kalawatia",
-  role: "Backend Developer",
-  bio: "Python backend developer in progress. Building secure APIs with FastAPI and PostgreSQL. One commit at a time.",
-  email: "vanshkalawatia2@gmail.com",
-  phone: "",
-  github: "https://github.com/vanshkalawatia",
-  linkedin: "https://linkedin.com/in/vanshkalawatia",
-  location: "India",
-  avatarUrl: "https://avatars.githubusercontent.com/u/295721289?v=4",
-  resumeUrl: "https://vansh-portfolio-bay.vercel.app/resume.pdf",
-  facebook: "",
-  instagram: "https://www.instagram.com/vansh0x00/",
-  twitter: "https://x.com/vansh0x00",
-  leetcode: "https://leetcode.com/u/vanshkalawatia/",
-};
-
-const MOCK_BLOGS: any[] = [
-  {
-    id: 1,
-    title: "Building AI-Powered Document Understanding Systems",
-    description: "A comprehensive guide to implementing document AI solutions using modern machine learning techniques and transformer models.",
-    thumbnail: "/images/blog-document-ai.jpg",
-    externalLink: "https://medium.com/@mehedihasan/building-ai-powered-document-understanding-systems",
-    platform: "Medium",
-    date: "2024-12-15",
-    tags: ["AI", "Document AI", "Machine Learning", "Transformers"]
-  },
-  {
-    id: 2,
-    title: "Optimizing LLM Inference for Production Workloads",
-    description: "Learn how to deploy large language models efficiently with vLLM, quantization, and optimization techniques.",
-    thumbnail: "/images/blog-llm-optimization.jpg",
-    externalLink: "https://substack.com/@mehedihasan/optimizing-llm-inference",
-    platform: "Substack",
-    date: "2024-11-20",
-    tags: ["LLM", "vLLM", "Optimization", "Production"]
-  },
-  {
-    id: 3,
-    title: "RAG Systems: From Theory to Production",
-    description: "Implementing Retrieval-Augmented Generation systems with LangChain, vector databases, and real-world considerations.",
-    thumbnail: "/images/blog-rag-systems.jpg",
-    externalLink: "https://linkedin.com/pulse/rag-systems-theory-production-mehedi-hasan",
-    platform: "LinkedIn",
-    date: "2024-10-10",
-    tags: ["RAG", "LangChain", "Vector DB", "NLP"]
-  },
-  {
-    id: 4,
-    title: "Computer Vision in the Real World: Challenges and Solutions",
-    description: "Exploring practical applications of computer vision, from object detection to document processing.",
-    thumbnail: "/images/blog-computer-vision.jpg",
-    externalLink: "https://medium.com/@mehedihasan/computer-vision-real-world-challenges",
-    platform: "Medium",
-    date: "2024-09-05",
-    tags: ["Computer Vision", "YOLO", "OpenCV", "Deep Learning"]
-  },
-  {
-    id: 5,
-    title: "The Future of AI Engineering: Trends and Predictions",
-    description: "Thoughts on where AI engineering is headed and what skills will be most valuable in the coming years.",
-    thumbnail: "/images/blog-ai-future.jpg",
-    externalLink: "https://substack.com/@mehedihasan/future-of-ai-engineering",
-    platform: "Substack",
-    date: "2024-08-15",
-    tags: ["AI", "Future", "Engineering", "Trends"]
-  },
-  {
-    id: 6,
-    title: "Building Scalable ML Pipelines with Docker and Kubernetes",
-    description: "A practical guide to containerizing machine learning workflows for production deployment.",
-    thumbnail: "/images/blog-ml-pipelines.jpg",
-    externalLink: "https://linkedin.com/pulse/scalable-ml-pipelines-docker-kubernetes-mehedi-hasan",
-    platform: "LinkedIn",
-    date: "2024-07-22",
-    tags: ["ML Pipelines", "Docker", "Kubernetes", "DevOps"]
-  },
-];
-
-const MOCK_EXPERIENCES: Experience[] = [
-  {
-    id: 1,
-    title: "Senior Software Engineer",
-    company: "Technonext",
-    period: "Jun 2025 – Present",
-    description: [
-      "Working on Ticket Parsing for airline/passenger documents with structured field extraction",
-      "Built local LLM-powered parsing pipeline using vLLM for high-throughput inference",
-      "Designed heuristic validation layer to reduce hallucinations and ensure schema-correct extraction",
-      "Tech: vLLM, Local LLM, RAG, Python, FastAPI"
-    ]
-  },
-  {
-    id: 2,
-    title: "Senior AI Engineer",
-    company: "Next Solution Lab",
-    period: "Jun 2023 – Jun 2025",
-    description: [
-      "Led English DeepICR system for document understanding (contracts/invoices)",
-      "Built and trained Text Detection, Layout Detection, Text Recognition models",
-      "Tech: Mask R-CNN, OpenCV, YOLOv7, DBNet, LayoutLM, BROS",
-      "Optimized training and inference pipelines with PyTorch DDP and CUDA for improved throughput",
-      "Tech: PyTorch DDP, CUDA, cuDNN",
-      "Packaged services with Docker and managed deployment via AWS (EC2, S3, ECR, CloudWatch)",
-      "Implemented LoRA/PEFT-based LLM fine-tuning and inference acceleration pipelines",
-      "Tech: HuggingFace Transformers, BitsAndBytes, ONNX",
-      "Built RAG search system for Japanese legal documents with conversational Q&A",
-      "Tech: LangChain, ChromaDB, Elasticsearch, FastAPI"
-    ]
-  },
-  {
-    id: 3,
-    title: "AI Engineer",
-    company: "Next Solution Lab",
-    period: "Jun 2022 – Jun 2023",
-    description: [
-      "Built Japanese Text-recognition training pipeline with ~5,000-character coverage",
-      "Tech: RCNN+CTC",
-      "Trained and tested models for English DeepICR on new datasets every sprint",
-      "Developed DocQA system for Q&A on contracts and invoices",
-      "Tech: BERT, RoBERTa, Flask, Streamlit",
-      "Implemented Multilingual OCR for Arabic, Vietnamese, Thai, and Indonesian documents",
-      "Tech: Google Vision API, FastAPI, NVIDIA NeMo"
-    ]
-  },
-  {
-    id: 4,
-    title: "Associate AI Engineer",
-    company: "Next Solution Lab",
-    period: "Jun 2021 – Jun 2022",
-    description: [
-      "Built Key-Value Extraction Module with OpenCV rule engine extracting 128 fields",
-      "Tech: OpenCV, REST API",
-      "Developed Smart Farming POC for camera-only cattle monitoring",
-      "Tech: Detectron2, SORT",
-      "Implemented ID/OCR system for driving license extraction",
-      "Tech: YOLOv5, FastAPI, Streamlit"
-    ]
-  }
-];
-
-const MOCK_PROJECTS: Project[] = [
-  {
-    id: 1,
-    title: "Shorol Notes — AI-Powered Note-Taking",
-    description: "Voice notes with AI transcription and summarization; calendar sync with Bangla-first UX. Pluggable backends supporting OpenAI, Ollama, and Hugging Face models.",
-    techStack: ["React", "TypeScript", "Vite", "Node.js", "Express", "TailwindCSS", "OpenAI API"],
-    link: "https://github.com/Mehedi-Hasan-Abir"
-  },
-  {
-    id: 2,
-    title: "AI-Powered Research Agent",
-    description: "ReAct-style tool-using agent with integrated search across PubMed, Wikipedia, ArXiv, and the web. Configurable prompts and models for diverse research queries.",
-    techStack: ["Python", "FastAPI", "LangChain", "Transformers", "SerpAPI"],
-    link: "https://github.com/Mehedi-Hasan-Abir"
-  },
-  {
-    id: 3,
-    title: "Japanese Lawyer Assistant",
-    description: "Legal Q&A system over Japanese corpus using RAG with FAISS retriever and ELYZALLaMA-2. Provides concise answers with custom prompts.",
-    techStack: ["Python", "LangChain", "FAISS", "FastAPI", "HuggingFace"],
-    link: "https://github.com/Mehedi-Hasan-Abir"
-  }
-];
-
-const MOCK_SKILLS: Skill[] = [
-  {
-    id: 1,
-    category: "Programming",
-    items: ["Python", "JavaScript", "Node.js", "C#", "Java", "TypeScript"]
-  },
-  {
-    id: 2,
-    category: "ML & Deep Learning",
-    items: ["PyTorch", "TensorFlow", "Transformers", "YOLOv7", "Mask R-CNN", "LayoutLM", "ONNX"]
-  },
-  {
-    id: 3,
-    category: "LLMs & NLP",
-    items: ["BERT", "RoBERTa", "LLM Fine-tuning", "LoRA/PEFT", "RAG", "LangChain", "ChromaDB"]
-  },
-  {
-    id: 4,
-    category: "Backend & APIs",
-    items: ["FastAPI", "Express.js", "REST API", "Docker", "CI/CD"]
-  },
-  {
-    id: 5,
-    category: "Frontend",
-    items: ["React", "Material-UI", "TailwindCSS", "Vite"]
-  },
-  {
-    id: 6,
-    category: "Cloud & DevOps",
-    items: ["AWS (EC2, S3, Lambda, ECR)", "Docker", "Elasticsearch", "CloudWatch"]
-  }
-];
-
-export const MOCK_EDUCATION = [
-  {
-    id: 1,
-    institution: "Ahsanullah University of Science and Technology (AUST)",
-    degree: "Bachelor of Science in Computer Science & Engineering",
-    gpa: "3.59/4.00",
-    period: "Apr 2016 – Jan 2021"
-  },
-  {
-    id: 2,
-    institution: "Hermann Gmeiner School, Mirpur",
-    degree: "Higher Secondary Certificate (HSC)",
-    gpa: "5.00/5.00",
-    period: "2013 – 2015"
-  },
-  {
-    id: 3,
-    institution: "Mirpur Bangla School & College",
-    degree: "Secondary School Certificate (SSC)",
-    gpa: "5.00/5.00",
-    period: "2003 – 2013"
-  }
-];
-
-export const MOCK_RESEARCH = [
-  {
-    id: 1,
-    title: "Bengali Intent Classification with Generative Adversarial BERT",
-    authors: "Mehedi Hasan (First Author)",
-    venue: "IEEE Xplore",
-    year: "2023",
-    link: "https://github.com/Mehedi-Hasan-Abir"
-  },
-  {
-    id: 2,
-    title: "Design of an Arrhythmia Classification Algorithm Using 2-D Convolutional Neural Network",
-    authors: "Mehedi Hasan (First Author)",
-    venue: "Undergraduate Thesis, AUST",
-    year: "2021",
-    link: "https://github.com/Mehedi-Hasan-Abir"
-  }
-];
+import {
+  personalInfo as CONFIG_PERSONAL_INFO,
+  experiencesData as CONFIG_EXPERIENCES,
+  projectsData as CONFIG_PROJECTS,
+  skillsData as CONFIG_SKILLS,
+  blogsData as CONFIG_BLOGS,
+  educationData as CONFIG_EDUCATION,
+  certificationsData as CONFIG_CERTIFICATIONS,
+  interestsData as CONFIG_INTERESTS,
+} from "../PORTFOLIO_CONFIG";
 
 export interface IStorage {
   getExperiences(): Promise<Experience[]>;
   getProjects(): Promise<Project[]>;
   getSkills(): Promise<Skill[]>;
   getPersonalInfo(): Promise<PersonalInfo | undefined>;
+  getBlogs(): Promise<any[]>;
+  getEducation(): Promise<any[]>;
+  getCertifications(): Promise<any[]>;
+  getInterests(): Promise<any[]>;
   
   createExperience(experience: InsertExperience): Promise<Experience>;
   createProject(project: InsertProject): Promise<Project>;
@@ -266,30 +35,41 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getExperiences(): Promise<Experience[]> {
-    if (!db) return MOCK_EXPERIENCES;
+    if (!db) return CONFIG_EXPERIENCES as any;
     return await db.select().from(experiences).orderBy(experiences.id);
   }
 
   async getProjects(): Promise<Project[]> {
-    if (!db) return MOCK_PROJECTS;
+    if (!db) return CONFIG_PROJECTS as any;
     return await db.select().from(projects).orderBy(projects.id);
   }
 
   async getSkills(): Promise<Skill[]> {
-    if (!db) return MOCK_SKILLS;
+    if (!db) return CONFIG_SKILLS as any;
     return await db.select().from(skills).orderBy(skills.id);
   }
 
   async getPersonalInfo(): Promise<PersonalInfo | undefined> {
-    if (!db) return MOCK_PERSONAL_INFO;
+    if (!db) return CONFIG_PERSONAL_INFO as any;
     const [info] = await db.select().from(personalInfo).limit(1);
     return info;
   }
 
   async getBlogs(): Promise<any[]> {
-    if (!db) return MOCK_BLOGS;
-    // Since there's no blogs table in the database, return mock data
-    return MOCK_BLOGS;
+    if (!db) return CONFIG_BLOGS as any;
+    return CONFIG_BLOGS;
+  }
+
+  async getEducation(): Promise<any[]> {
+    return CONFIG_EDUCATION;
+  }
+
+  async getCertifications(): Promise<any[]> {
+    return CONFIG_CERTIFICATIONS;
+  }
+
+  async getInterests(): Promise<any[]> {
+    return CONFIG_INTERESTS;
   }
 
   async createExperience(experience: InsertExperience): Promise<Experience> {

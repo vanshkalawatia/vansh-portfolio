@@ -83,8 +83,8 @@ export interface InterestItem {
 // ------------------------------------------------------------------------
 export const personalInfo: PersonalInfo = {
   name: "Vansh Kalawatia",
-  role: "Backend Developer",
-  bio: "Python backend developer in progress. Building secure APIs with FastAPI and PostgreSQL. One commit at a time.",
+  role: "Aspiring Backend Developer & CS Student",
+  bio: "CS student documenting the journey of mastering backend engineering. Building CLI tools, APIs, and exploring network security one commit at a time.",
   email: "vanshkalawatia2@gmail.com",
   phone: "",
   github: "https://github.com/vanshkalawatia",
@@ -94,7 +94,7 @@ export const personalInfo: PersonalInfo = {
   instagram: "https://www.instagram.com/vansh0x00/",
   location: "India (UTC+5:30)",
   avatarUrl: "image/avatar.jpg",
-  resumeUrl: "",
+  resumeUrl: "images/resume.pdf",
 };
 
 // ------------------------------------------------------------------------
@@ -169,20 +169,44 @@ export const experiencesData: ExperienceItem[] = [
 export const projectsData: ProjectItem[] = [
   {
     id: 1,
-    title: "Project Port Scanner",
+    title: "Phase 1: First Real Tools",
     description:
-      "A network security tool for scanning ports on target hosts. Built to understand networking fundamentals and security concepts.",
-    techStack: ["Python", "Networking", "Security", "Sockets"],
-    link: "https://github.com/vanshkalawatia/project-port-scanner",
+      "Python CLI tools built with persistent data storage, JSON file I/O, error handling, network socket exploration, and secure coding practices.",
+    techStack: ["Python", "CLI", "File I/O", "Sockets", "JSON"],
+    link: "https://github.com/vanshkalawatia/Phase-1-First-Real-Tools",
   },
   {
     id: 2,
-    title: "Portfolio Website (V2)",
+    title: "Developer Portfolio (V2)",
     description:
-      "Modern developer portfolio built with React, Vite, Tailwind CSS, and Anime.js, featuring live LeetCode stats, interactive mind map, and dark mode.",
+      "Modern developer portfolio built with React, Vite, TypeScript, and Tailwind CSS. Features dynamic GitHub repository sync, live LeetCode stats, and interactive mind map.",
     techStack: ["React", "Vite", "TypeScript", "Tailwind CSS", "Anime.js"],
     link: "https://github.com/vanshkalawatia/vansh-portfolio",
     liveUrl: "https://vanshkalawatia.github.io/vansh-portfolio/",
+  },
+  {
+    id: 3,
+    title: "DSA & LeetCode Tracker",
+    description:
+      "A structured repository tracking algorithms, data structure problems, and pattern solutions solved on LeetCode using Python 3.",
+    techStack: ["Python 3", "Algorithms", "Data Structures", "LeetCode"],
+    link: "https://github.com/vanshkalawatia/DSA-Leetcode-Python",
+  },
+  {
+    id: 4,
+    title: "Phase 0: The Absolute Basics",
+    description:
+      "Weeks 1–2 of my backend journey: core programming fundamentals, syntax mastery, control flow, functions, and initial algorithmic logic.",
+    techStack: ["Python", "Fundamentals", "Logic", "Problem Solving"],
+    link: "https://github.com/vanshkalawatia/Phase-0-The-Absolute-Basics",
+  },
+  {
+    id: 5,
+    title: "Backend Developer Roadmap",
+    description:
+      "My curated learning roadmap and resource collection for backend engineering in 2026: languages, frameworks, databases, APIs, and DevOps.",
+    techStack: ["Backend", "Architecture", "Databases", "Roadmap"],
+    link: "https://github.com/vanshkalawatia/Back-end-Roadmap",
   },
 ];
 
@@ -192,78 +216,48 @@ export const projectsData: ProjectItem[] = [
 export const skillsData: SkillCategory[] = [
   {
     id: 1,
-    category: "Python ",
+    category: "Core Languages",
     items: [
       "Python 3",
-      // "FastAPI",
-      // "Flask (basics)",
-      // "REST API Design",
-      // "Pydantic",
-      // "OOP",
+      "Java (NPTEL Certified)",
     ],
   },
   {
-    id: 4,
-    category: "Security Fundamentals",
+    id: 2,
+    category: "Databases & Storage",
     items: [
-      "Foundations of Cryptography",
-      "Port Scanning",
-      // "Secure API Design",
-      // "Auth & Authorization",
-      // "Input Validation",
+      "SQL Fundamentals",
+      "Database Design (NPTEL Certified)",
+      "JSON & File I/O",
     ],
   },
   {
     id: 3,
-    category: "Databases",
+    category: "Security & Networking",
     items: [
-      // "PostgreSQL",
-      "SQL Fundamentals",
-      "Database Design (NPTEL certified)",
-      // "SQLAlchemy / ORM basics",
+      "Foundations of Cryptography (NPTEL)",
+      "Socket Programming Basics",
+      "Port Scanning",
     ],
   },
-  // {
-  //   id: 4,
-  //   category: "DSA & Problem Solving",
-  //   items: [
-  //     // "Arrays & Strings",
-  //     // "Hash Maps & Sets",
-  //     // "Two Pointers",
-  //     // "Sliding Window",
-  //     // "Sorting & Searching",
-  //   ],
-  // },
-  // {
-  //   id: 5,
-  //   category: "DevOps & Tools",
-  //   items: [
-  //     // "Git & GitHub",
-  //     // "Linux / CLI",
-  //     // "Docker (learning)",
-  //     // "Zed",
-  //     // "Postman",
-  //   ],
-  // },
   {
-    id: 6,
-    category: "Web Basics",
+    id: 4,
+    category: "Problem Solving",
     items: [
-      "HTML & CSS",
-      // "JavaScript",
-      // "Astro",
-      // "React Basics",
+      "Data Structures & Algorithms",
+      "LeetCode Problem Solving",
+      "Object-Oriented Programming (OOP)",
     ],
   },
-
   {
-    id: 2,
-    category: "Language",
+    id: 5,
+    category: "Tools & Environment",
     items: [
-      "Python",
-      "Java",
-    ]
-  }
+      "Git & GitHub",
+      "Linux / CLI Commands",
+      "Markdown & Documentation",
+    ],
+  },
 ];
 
 // ------------------------------------------------------------------------

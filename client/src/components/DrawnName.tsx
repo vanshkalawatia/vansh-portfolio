@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { animate } from "animejs";
+import { animate, stagger } from "animejs";
 import { useCanAnimate, useInView } from "@/lib/use-anime";
 
 export function DrawnName() {
@@ -15,7 +15,7 @@ export function DrawnName() {
       translateY: [24, 0],
       duration: 800,
       ease: "outExpo",
-      delay: (_: unknown, i: number) => 150 + i * 180,
+      delay: stagger(180, { start: 150 }),
     });
   }, [canAnimate, inView]);
 

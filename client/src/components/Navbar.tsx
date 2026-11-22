@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { SiGithub, SiLinkedin, SiLeetcode } from "react-icons/si";
+import { SiGithub, SiLeetcode } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import { ThemeControls } from "@/components/ThemeProvider";
 import { scrollToSection, activeSection } from "@/lib/scroll-to";
 
@@ -19,7 +20,7 @@ const navIds = navItems.map((item) => item.to);
 
 const socialLinks = [
   { href: "https://github.com/vanshkalawatia", label: "GitHub", Icon: SiGithub },
-  { href: "https://linkedin.com/in/vanshkalawatia", label: "LinkedIn", Icon: SiLinkedin },
+  { href: "https://linkedin.com/in/vanshkalawatia", label: "LinkedIn", Icon: FaLinkedin },
   { href: "https://leetcode.com/u/vanshkalawatia/", label: "LeetCode", Icon: SiLeetcode },
 ];
 

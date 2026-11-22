@@ -129,6 +129,62 @@ export async function registerRoutes(
     res.json(data);
   });
 
+  app.get("/api/education", async (_req, res) => {
+    const data = await storage.getEducation();
+    res.json(data);
+  });
+
+  app.get("/api/certifications", async (_req, res) => {
+    const data = await storage.getCertifications();
+    res.json(data);
+  });
+
+  app.get("/api/interests", async (_req, res) => {
+    const data = await storage.getInterests();
+    res.json(data);
+  });
+
+  // Cached GitHub Repos API
+  let cachedGitHubRepos: any[] | null = null;
+  let lastFetchTime = 0;
+
+  app.get("/api/github/repos", async (_req, res) => {
+    const now = Date.now();
+    if (cachedGitHubRepos && (now - lastFetchTime < 10 * 60 * 1000)) {
+      return res.json(cachedGitHubRepos);
+    }
+
+    try {
+      const response = await fetch("https://api.github.com/users/vanshkalawatia/repos?sort=pushed&per_page=30", {
+        headers: { "User-Agent": "Portfolio-App" },
+      });
+      if (response.ok) {
+        const repos = await response.json();
+        if (Array.isArray(repos)) {
+          cachedGitHubRepos = repos;
+          lastFetchTime = now;
+          return res.json(repos);
+        }
+      }
+    } catch (e) {
+      console.warn("GitHub API fetch error:", e);
+    }
+
+    if (cachedGitHubRepos) {
+      return res.json(cachedGitHubRepos);
+    }
+    res.json([]);
+  });
+
+  app.post("/api/contact", async (req, res) => {
+    const { name, email, subject, message } = req.body || {};
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: "Name, email, and message are required." });
+    }
+    console.log(`[Contact Form] Received message from ${name} (${email}): ${subject || 'No subject'} - ${message}`);
+    res.json({ success: true, message: "Thank you for reaching out! I will get back to you soon." });
+  });
+
   // Seed Data function
   await seedDatabase();
 

@@ -9,9 +9,11 @@ import {
   GraduationCap,
   Award,
 } from "lucide-react";
-import { SiGithub, SiLinkedin, SiLeetcode, SiX, SiInstagram } from "react-icons/si";
+import { SiGithub, SiLeetcode, SiX, SiInstagram } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import { Navbar } from "@/components/Navbar";
-import { useExperiences, useProjects, useSkills, usePersonalInfo, useEducation, useCertifications, useInterests, useHeroPhrases, useBlogs } from "@/hooks/use-portfolio";
+import { useExperiences, useProjects, useSkills, usePersonalInfo, useEducation, useCertifications, useInterests, useHeroPhrases, useBlogs, useGitHubProfile, useLeetCodeStats } from "@/hooks/use-portfolio";
+import { ContactForm } from "@/components/ContactForm";
 import { LeetCodeSection } from "@/components/LeetCodeSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SocialLinks } from "@/components/SocialLinks";
@@ -52,6 +54,8 @@ export default function Home() {
   const { data: certifications } = useCertifications();
   const { data: interests } = useInterests();
   const { data: blogs } = useBlogs();
+  const { data: ghProfile } = useGitHubProfile();
+  const { data: leetCodeStats } = useLeetCodeStats();
   const heroPhrases = useHeroPhrases();
   const [detailId, setDetailId] = useState<number | null>(null);
   const openDetails = (p: { id: number }) => setDetailId(p.id);
@@ -130,7 +134,7 @@ export default function Home() {
               <div className="flex items-center gap-1 mt-8">
                 {[
                   { href: personalInfo.github, label: "GitHub", Icon: SiGithub },
-                  { href: personalInfo.linkedin, label: "LinkedIn", Icon: SiLinkedin },
+                  { href: personalInfo.linkedin, label: "LinkedIn", Icon: FaLinkedin },
                   { href: "https://leetcode.com/u/vanshkalawatia/", label: "LeetCode", Icon: SiLeetcode },
                   { href: personalInfo.twitter, label: "X (Twitter)", Icon: SiX },
                   { href: personalInfo.instagram, label: "Instagram", Icon: SiInstagram },
@@ -217,8 +221,8 @@ export default function Home() {
         {/* ============ STATS ============ */}
         <StatsStrip
           stats={[
-            { value: 19, suffix: "+", label: "LeetCode Solved" },
-            { value: techCount, label: "Technologies & Tools" },
+            { value: leetCodeStats?.totalSolved || 19, suffix: "+", label: "LeetCode Solved" },
+            { value: ghProfile?.public_repos || 6, label: "GitHub Repos" },
             { value: 3, label: "NPTEL Certifications" },
             { value: postCount, label: "Published Articles" },
           ]}
@@ -250,8 +254,8 @@ export default function Home() {
                 {projects[1] && (
                   <ProjectCell project={projects[1]} index={1} className="sm:col-span-2 lg:col-span-5" onDetails={openDetails} />
                 )}
-                {/* Row 2: next two projects, split evenly */}
-                {projects.slice(2, 4).map((project, index) => (
+                {/* Row 2: next projects, split evenly */}
+                {projects.slice(2).map((project, index) => (
                   <ProjectCell
                     key={project.id}
                     project={project}
@@ -392,18 +396,9 @@ export default function Home() {
               </span>
             </h3>
             <p className="mt-6 text-muted-foreground max-w-xl leading-relaxed">
-              I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+              I'm currently looking for new opportunities and learning every day. Whether you have feedback, questions about my projects, or just want to connect, feel free to reach out!
             </p>
-            <Magnetic strength={0.25}>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="btn-push relative inline-flex items-center gap-2.5 mt-8 px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:opacity-90 transition-opacity"
-              >
-                <PulseRing enabled={canAnimate} />
-                Say Hello
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-              </a>
-            </Magnetic>
+            <ContactForm email={personalInfo.email} />
 
             <div className="rule-t pt-8 mt-12">
               <SocialLinks
